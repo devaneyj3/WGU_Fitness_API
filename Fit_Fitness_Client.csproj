@@ -53,6 +53,23 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="DotNetEnv" Version="2.5.0" />
+		<PackageReference Include="Npgsql" Version="7.0.4" />
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Services\" />
+	  <None Remove="Models\" />
+	  <None Remove=".env" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Services\" />
+	  <Folder Include="Models\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Include=".env">
+	    <LogicalName>Fit_Fitness_Client.env</LogicalName>
+	  </EmbeddedResource>
+	</ItemGroup>
 </Project>

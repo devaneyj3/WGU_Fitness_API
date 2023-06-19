@@ -1,25 +1,83 @@
-﻿namespace Fit_Fitness_Client;
+﻿
 
-public partial class MainPage : ContentPage
+using System.Linq;
+using Fit_Fitness_Client.Models;
+using Fit_Fitness_Client.Services;
+
+namespace Fit_Fitness_Client;
+
+public partial class Signin: ContentPage
 {
-	int count = 0;
 
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    public Signin()
+    {
+        InitializeComponent();
+        Preferences.Clear();
+    }
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+    async void SignIn_Clicked(object sender, EventArgs e)
+    {
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+        if (isValid(username.Text, password.Text))
+        {
+
+            Preferences.Set("UserLoggedIn", true);
+            await Navigation.PushAsync(new DashboardPage());
+        }
+        else
+        {
+            await DisplayAlert("Error", "Invalid Credentials", "OK");
+        }
+
+
+    }
+
+    void Username_Completed(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(username.Text))
+        {
+            DisplayAlert("Username Error", "You need to enter a username", "OK");
+        }
+    }
+
+    void Password_Completed(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(password.Text))
+        {
+            DisplayAlert("Password Error", "You need to enter a password", "OK");
+        }
+    }
+
+
+    void SignUp_Tapped(object sender, TappedEventArgs e)
+    {
+        Navigation.PushAsync(new SignUp());
+    }
+
+    public bool isValid(string username, string password)
+
+    {
+        List<Client> clients = DatabaseServices.GetClients();
+
+        Client client = clients.FirstOrDefault(i => i.Username == username);
+
+        // If the client record does not exist, return false
+        if (client == null)
+        {
+            return false;
+        }
+        else
+        {
+
+            Preferences.Set("SignedInClientId", client.Id);
+            Preferences.Set("SignedInClientName", client.Name);
+            Preferences.Set("SignedInClientEmail", client.Email);
+            Preferences.Set("SignedInClientPhone", client.Phone);
+        }
+        // Compare the hashed password in the client record with the password provided
+        return PasswordHasher.VerifyPassword(password, client.Password);
+    }
 }
 
 
