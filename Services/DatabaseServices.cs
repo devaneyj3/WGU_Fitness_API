@@ -64,7 +64,7 @@ namespace Fit_Fitness_Client.Services
         }
         #endregion
 
-
+        #region Get Fitness Classes
         public static List<FitnessClass> GetFitnessClasses(string tableName, string instructorId = null)
         {
             List<FitnessClass> list = new List<FitnessClass>();
@@ -96,5 +96,27 @@ namespace Fit_Fitness_Client.Services
             }
             return list;
         }
+        #endregion
+        public static bool ReserveClass(string query)
+        {
+
+
+            using (var connection = DatabaseConnection.OpenConnection(connectionString))
+            {
+
+                // Execute create query
+                bool isSuccessfull = DatabaseConnection.ExecuteQuery(query, connection);
+                if (isSuccessfull)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+        }
     }
+
 }
