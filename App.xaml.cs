@@ -8,6 +8,7 @@ public partial class App : Application
         InitializeComponent();
 
         Client.MakeClientTable();
+        ClientClasses.MakeClientClassesTable();
 
 
         if (Preferences.ContainsKey("UserLoggedIn"))

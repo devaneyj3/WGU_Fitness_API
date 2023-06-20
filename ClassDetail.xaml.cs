@@ -9,17 +9,15 @@ partial class ClassDetail : ContentPage
 {
     int selectedId = 0;
     string selectedName = "";
-    int enrollment = 0;
 
     public ClassDetail(FitnessClass fitnessClass)
     {
         InitializeComponent();
 
-        FitnessClass.SelectedId = fitnessClass.Id;
+        FitnessClass.SelectedId = fitnessClass.FitnessClassId;
         ClassView.BindingContext = fitnessClass;
-        selectedId = fitnessClass.Id;
+        selectedId = fitnessClass.FitnessClassId;
         selectedName = fitnessClass.Name;
-        enrollment = fitnessClass.Enrollment;
     }
 
 
@@ -30,9 +28,6 @@ partial class ClassDetail : ContentPage
 
         if (response == true)
         {
-            Console.WriteLine(enrollment.ToString());
-            enrollment++;
-            Console.WriteLine(enrollment.ToString());
             string query = "UPDATE fitness_classes SET enrollment = enrollment + 1 WHERE id = @id";
 
 

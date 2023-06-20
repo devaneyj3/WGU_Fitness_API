@@ -10,7 +10,7 @@ namespace Fit_Fitness_Client.Models
         public static string SignedInClientEmail = "";
         public static string SignedInClientPhone = "";
 
-        public int Id { get; set; }
+        public int ClientId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
@@ -19,7 +19,7 @@ namespace Fit_Fitness_Client.Models
 
         public Client(int id, string name, string email, string phone, string username, string password)
         {
-            Id = id;
+            ClientId = id;
             Name = name;
             Email = email;
             Phone = phone;
@@ -31,7 +31,7 @@ namespace Fit_Fitness_Client.Models
         {
             string createTableQuery = @"
                  CREATE TABLE IF NOT EXISTS Clients (
-                     Id SERIAL PRIMARY KEY,
+                     client_id SERIAL PRIMARY KEY,
                      name VARCHAR(100) NOT NULL,
                      email VARCHAR(100) NOT NULL,
                      phone VARCHAR(100) NOT NULL,

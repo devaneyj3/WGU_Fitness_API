@@ -70,7 +70,7 @@ public partial class Signin: ContentPage
         else
         {
 
-            Preferences.Set("SignedInClientId", client.Id);
+            Preferences.Set("SignedInClientId", client.ClientId);
             Preferences.Set("SignedInClientName", client.Name);
             Preferences.Set("SignedInClientEmail", client.Email);
             Preferences.Set("SignedInClientPhone", client.Phone);
