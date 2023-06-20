@@ -6,7 +6,7 @@ namespace Fit_Fitness_Client.Models
 	{
         public static int SelectedId = 0;
         
-        public int FitnessClassId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
         public string Location { get; set; }
@@ -22,7 +22,7 @@ namespace Fit_Fitness_Client.Models
 
         public FitnessClass(int id, string name, string location, string details, string instructorName, string instructorEmail, string instructorPhone, DateTime start, DateTime end, int capacity, int enrollment, int instructorId)
         {
-            FitnessClassId = id;
+            Id = id;
             Name = name;
             Location = location;
             Details = details;

@@ -15,8 +15,8 @@ namespace Fit_Fitness_Client.Models
             {
                 string createTableQuery = @"
                  CREATE TABLE client_classes (
-                    client_id INT REFERENCES clients(client_id),
-                    class_id INT REFERENCES classes(class_id),
+                    client_id INT REFERENCES clients(id),
+                    class_id INT REFERENCES fitness_classes(id),
                     PRIMARY KEY (client_id, class_id)
                 );";
                 DatabaseServices.Create(createTableQuery);

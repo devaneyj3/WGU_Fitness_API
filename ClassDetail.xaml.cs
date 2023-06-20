@@ -14,9 +14,9 @@ partial class ClassDetail : ContentPage
     {
         InitializeComponent();
 
-        FitnessClass.SelectedId = fitnessClass.FitnessClassId;
+        FitnessClass.SelectedId = fitnessClass.Id;
         ClassView.BindingContext = fitnessClass;
-        selectedId = fitnessClass.FitnessClassId;
+        selectedId = fitnessClass.Id;
         selectedName = fitnessClass.Name;
     }
 
