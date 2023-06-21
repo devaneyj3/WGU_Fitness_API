@@ -1,5 +1,6 @@
 ﻿using System;
 using Fit_Fitness_Client.Services;
+using Npgsql;
 
 namespace Fit_Fitness_Client.Models
 {
@@ -22,6 +23,39 @@ namespace Fit_Fitness_Client.Models
                 DatabaseServices.ExecuteNonQuery(createTableQuery);
             }
         }
+        #region Get Client Classes
+        public static List<FitnessClass> GetClientClasses()
+        {
+            List<FitnessClass> list = new List<FitnessClass>();
+            using (var connection = DatabaseConnection.OpenConnection(DatabaseConnection.connectionString))
+            {
+                string query = "";
+
+
+                query = $"SELECT * FROM fitness_classes JOIN client_classes ON fitness_classes.id = client_classes.class_id WHERE client_classes.client_id = @client_id";
+
+            
+                using (var command = new NpgsqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@client_id", Client.SignedInClientId);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                                FitnessClass fitnessClass = new         FitnessClass(reader.GetInt32(reader.GetOrdinal("Id")), reader.GetString(reader.GetOrdinal("name")), reader.GetString(reader.GetOrdinal("location")), reader.GetString(reader.GetOrdinal("details")), reader.GetString(reader.GetOrdinal("instructorname")), reader.GetString(reader.GetOrdinal("instructoremail")), reader.GetString(reader.GetOrdinal("instructorphone")), reader.GetDateTime(reader.GetOrdinal("start_time")), reader.GetDateTime(reader.GetOrdinal("end_time")), reader.GetInt32(reader.GetOrdinal("capacity")), reader.GetInt32(reader.GetOrdinal("enrollment")),
+                          reader.GetInt32(reader.GetOrdinal("instructor_id"))
+                        );
+
+                            list.Add(fitnessClass);
+                        }
+                    }
+                }
+
+            }
+            return list;
+        }
+        #endregion
+
     }
 }
 

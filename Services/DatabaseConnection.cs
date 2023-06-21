@@ -10,6 +10,7 @@ namespace Fit_Fitness_Client.Services
 {
 	public class DatabaseConnection
 	{
+        public static string connectionString = DatabaseConnection.LoadENV();
         public static NpgsqlConnection OpenConnection(string connectionString)
         {
             var connection = new NpgsqlConnection(connectionString);
