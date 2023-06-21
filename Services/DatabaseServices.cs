@@ -16,9 +16,9 @@ namespace Fit_Fitness_Client.Services
 
         static string connectionString = DatabaseConnection.LoadENV();
 
-        #region create table
+        #region create, update and delete operations
 
-        public static bool Create(string query, List<NpgsqlParameter> parameters = null)
+        public static bool ExecuteNonQuery(string query, List<NpgsqlParameter> parameters = null)
         {
 
             using (var connection = DatabaseConnection.OpenConnection(connectionString))
@@ -97,26 +97,7 @@ namespace Fit_Fitness_Client.Services
             return list;
         }
         #endregion
-        public static bool ReserveClass(string query)
-        {
-
-
-            using (var connection = DatabaseConnection.OpenConnection(connectionString))
-            {
-
-                // Execute create query
-                bool isSuccessfull = DatabaseConnection.ExecuteQuery(query, connection);
-                if (isSuccessfull)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-
-            }
-        }
+   
     }
 
 }

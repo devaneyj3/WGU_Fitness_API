@@ -30,13 +30,22 @@ partial class ClassDetail : ContentPage
         {
             string query = "UPDATE fitness_classes SET enrollment = enrollment + 1 WHERE id = @id";
 
+            var addClassToClient = "INSERT INTO client_classes(client_id, class_id) VALUES(@client_id, @class_id)";
 
-            List<NpgsqlParameter> parameters = new List<NpgsqlParameter>
+
+            List<NpgsqlParameter> classToClientParameters = new List<NpgsqlParameter>
             {
-            new NpgsqlParameter("@id", FitnessClass.SelectedId),
+                new NpgsqlParameter("@client_id", Client.SignedInClientId),
+                new NpgsqlParameter("@class_id", FitnessClass.SelectedId)
 
             };
-            bool isSucessfull = DatabaseServices.ReserveClass(query);
+            DatabaseServices.ExecuteNonQuery(addClassToClient, classToClientParameters);
+            List<NpgsqlParameter> ReserveParameters = new List<NpgsqlParameter>
+            {
+                new NpgsqlParameter("@id", FitnessClass.SelectedId),
+
+            };
+            bool isSucessfull = DatabaseServices.ExecuteNonQuery(query, ReserveParameters);
 
             if (isSucessfull)
             {

@@ -77,7 +77,7 @@ public partial class SignUp : ContentPage
             new NpgsqlParameter("@hashedPassword", hashedPassword)
         };
 
-        bool isSeccesful = DatabaseServices.Create(query, parameters);
+        bool isSeccesful = DatabaseServices.ExecuteNonQuery(query, parameters);
 
         if (isSeccesful)
         {

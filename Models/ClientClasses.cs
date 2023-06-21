@@ -19,7 +19,7 @@ namespace Fit_Fitness_Client.Models
                     class_id INT REFERENCES fitness_classes(id),
                     PRIMARY KEY (client_id, class_id)
                 );";
-                DatabaseServices.Create(createTableQuery);
+                DatabaseServices.ExecuteNonQuery(createTableQuery);
             }
         }
     }

@@ -38,7 +38,7 @@ namespace Fit_Fitness_Client.Models
                      username VARCHAR(100) NOT NULL,
                      password VARCHAR(100) NOT NULL
                  )";
-            DatabaseServices.Create(createTableQuery);
+            DatabaseServices.ExecuteNonQuery(createTableQuery);
         }
     }
 }
