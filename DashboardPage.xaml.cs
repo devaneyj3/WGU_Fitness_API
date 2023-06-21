@@ -25,7 +25,7 @@ public partial class DashboardPage : ContentPage
             Client.SignedInClientName = name;
             Client.SignedInClientEmail = email;
             Client.SignedInClientPhone = phone;
-            welcomeLb.Text = $"Welcome {Client.SignedInClientName}!";
+            
 
         }
         else
@@ -38,7 +38,7 @@ public partial class DashboardPage : ContentPage
         //
         List<FitnessClass> clientFitnessClassesList = ClientClasses.GetClientClasses();
 
-        cListView.ItemsSource = clientFitnessClassesList;
+        cCollectionView.ItemsSource = clientFitnessClassesList;
 
         // change label text based on class list count
         if (clientFitnessClassesList.Count > 0)
@@ -54,19 +54,16 @@ public partial class DashboardPage : ContentPage
 
     }
 
-    async void cListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    void cCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
     {
-        if (e.SelectedItem != null)
+        if (e.CurrentSelection.FirstOrDefault() is FitnessClass fitnessClass)
         {
 
-            var fitnessClass = e.SelectedItem as FitnessClass;
-
-
-
-            await Navigation.PushAsync(new ClassDetail(fitnessClass));
+            Navigation.PushAsync(new ClassDetail(fitnessClass));
 
         }
-        cListView.SelectedItem = null;
+        cCollectionView.SelectedItem = null;
     }
     async void OnSignOutClicked(object sender, EventArgs e)
     {

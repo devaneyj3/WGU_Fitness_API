@@ -20,7 +20,7 @@ public partial class SearchPage : ContentPage
         //all fitness classes
         List<FitnessClass> fitnessClassesList = DatabaseServices.GetFitnessClasses("fitness_classes");
 
-        cListView.ItemsSource = fitnessClassesList;
+        cCollectionView.ItemsSource = fitnessClassesList;
 
         // change label text based on class list count
         if (fitnessClassesList.Count > 0)
@@ -36,19 +36,16 @@ public partial class SearchPage : ContentPage
 
     }
 
-    async void cListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    void cCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
     {
-        if (e.SelectedItem != null)
+        if (e.CurrentSelection.FirstOrDefault() is FitnessClass fitnessClass)
         {
 
-            var fitnessClass = e.SelectedItem as FitnessClass;
-
-
-
-            await Navigation.PushAsync(new ClassDetail(fitnessClass));
+            Navigation.PushAsync(new ClassDetail(fitnessClass));
 
         }
-        cListView.SelectedItem = null;
+        cCollectionView.SelectedItem = null;
     }
 
 }

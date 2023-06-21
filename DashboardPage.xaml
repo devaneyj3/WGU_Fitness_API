@@ -2,91 +2,56 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fit_Fitness_Client.DashboardPage"
-             Title="Dashboard"
-             NavigationPage.HasBackButton="False">
-
-     <ContentPage.ToolbarItems>
-        
-        <ToolbarItem Text="Sign Out" Clicked="OnSignOutClicked"/>
-    </ContentPage.ToolbarItems>
-
+             Title="My Classes">
     <VerticalStackLayout Margin="20">
         <Label
-            x:Name="welcomeLb"
-            Text="Welcome Jordan"
-            FontAttributes="Bold"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Label
             x:Name="clHeaderLb"
-            Text="You are not currently teaching classes"
             Margin="20"
             VerticalOptions="Center"
             HorizontalOptions="Center"/>
-        <ListView x:Name="cListView" HasUnevenRows="True" RowHeight="200" ItemSelected="cListView_ItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate >
-                    <ViewCell>
-                        <VerticalStackLayout>
 
-                            <Grid Padding="10" RowSpacing="10" ColumnSpacing="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0"
-                           Text="{Binding Name}"
-                           FontAttributes="Bold" />
-                                <Label 
-                           Grid.Column="1"
-                          FontAttributes="Italic"
-                           VerticalOptions="End"
-                                    HorizontalOptions="CenterAndExpand">
-                                    <Label.Text>
-                                        <MultiBinding StringFormat="{}{0:M/dd/yy hh:mm tt} - {1:M/dd/yy hh:mm tt}">
-                                            <Binding Path="Start"/>
-                                            <Binding Path="End"/>
-                                        </MultiBinding>
-                                    </Label.Text>
-                                </Label>
-                                <Label Grid.Row="2"
-                           Grid.Column="0"
-                           Text="{Binding Location}"
-                           FontAttributes="Italic"
-                           VerticalOptions="End" />
-                                <Label
-                                    Grid.Row="3"
-                                    Grid.Column="0"
-                           Text="{Binding Details}"
-                           FontAttributes="Bold" />
-                                <Label
-                                    Grid.Row="4"
-                                    Grid.Column="0"
-                           Text="{Binding Capacity}"
-                           FontAttributes="Bold" />
-                                <Label
-                                    Grid.Row="5"
-                                    Grid.Column="0"
-                           Text="{Binding Enrollment}"
-                           FontAttributes="Bold" />
+        <!-- CollectionView -->
+        <CollectionView x:Name="cCollectionView" ItemsLayout="VerticalList" SelectionMode="Single" SelectionChanged="cCollectionView_SelectionChanged">
 
-                            </Grid>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" CornerRadius="5" BorderColor="LightGray">
+                        <Grid Padding="10" RowSpacing="10" ColumnSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                        </VerticalStackLayout>
-                    </ViewCell>
+                            <Label Text="Name:" Grid.Column="0" Grid.Row="0"/>
+                            <Label Grid.Column="1" Grid.Row="0"
+                               Text="{Binding Name}"
+                               FontAttributes="Italic" />
+
+                            <Label Text="Date:" Grid.Column="0" Grid.Row="1"/>
+                            <Label Grid.Column="1"
+                               Grid.Row="2"
+                               FontAttributes="Italic"
+                               HorizontalOptions="CenterAndExpand">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0:M/dd/yy hh:mm tt} - {1:M/dd/yy hh:mm tt}">
+                                        <Binding Path="Start"/>
+                                        <Binding Path="End"/>
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label Text="Location:" Grid.Column="0" Grid.Row="2"/>
+                            <Label Grid.Column="2" Grid.Row="1"
+                               Text="{Binding Location}"
+                               FontAttributes="Italic" />
+                        </Grid>
+                    </Frame>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>
