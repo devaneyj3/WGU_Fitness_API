@@ -52,5 +52,6 @@
         </Grid>
 
         <Button x:Name="ReserveClass" Text="Reserve Class" Clicked="ReserveClass_Clicked"/>
+        <Label x:Name="enrolledLb" Text="You are already enrolled" HorizontalTextAlignment="Center" IsVisible="false"/>
     </VerticalStackLayout>
 </ContentPage>

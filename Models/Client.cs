@@ -3,12 +3,13 @@ using Fit_Fitness_Client.Services;
 
 namespace Fit_Fitness_Client.Models
 {
-	public class Client
-	{
+    public class Client
+    {
         public static int SignedInClientId = 0;
         public static string SignedInClientName = "";
         public static string SignedInClientEmail = "";
         public static string SignedInClientPhone = "";
+
 
         public int Id { get; set; }
         public string Name { get; set; }

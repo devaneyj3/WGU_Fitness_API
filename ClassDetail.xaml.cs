@@ -18,6 +18,15 @@ partial class ClassDetail : ContentPage
         ClassView.BindingContext = fitnessClass;
         selectedId = fitnessClass.Id;
         selectedName = fitnessClass.Name;
+
+        //
+        bool isClientEnrolled = ClientClasses.IsEnrolled(fitnessClass.Id);
+
+        if (isClientEnrolled)
+        {
+            ReserveClass.IsVisible = false;
+            enrolledLb.IsVisible = true;
+        }
     }
 
 

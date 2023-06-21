@@ -35,11 +35,9 @@ public partial class DashboardPage : ContentPage
         }
 
 
-        //all fitness classes
-        List<FitnessClass> fitnessClassesList = DatabaseServices.GetFitnessClasses("fitness_classes");
-
         //
         List<FitnessClass> clientFitnessClassesList = ClientClasses.GetClientClasses();
+
         cListView.ItemsSource = clientFitnessClassesList;
 
         // change label text based on class list count
