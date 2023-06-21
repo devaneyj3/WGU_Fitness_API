@@ -52,6 +52,7 @@
         </Grid>
 
         <Button x:Name="ReserveClass" Text="Reserve Class" Clicked="ReserveClass_Clicked"/>
-        <Label x:Name="enrolledLb" Text="You are already enrolled" HorizontalTextAlignment="Center" IsVisible="false"/>
+        <Label x:Name="enrolledLb" Text="You are already enrolled" HorizontalTextAlignment="Center" Margin="50"  FontSize="Large" IsVisible="false"/>
+        <Button x:Name="WithdrawalBtn" Text="Withdrawal" BackgroundColor="Red" Margin="20" IsVisible="false" Clicked="WithdrawalBtn_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>
