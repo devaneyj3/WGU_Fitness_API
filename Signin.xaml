@@ -21,7 +21,7 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
-                Text="Welcome to the Fit Fitness Admin App. Please sign in"  
+                Text="Welcome to the Fit Fitness Client App. Please sign in"  
                 VerticalTextAlignment="Center"
                 HorizontalTextAlignment="Center"
                 TextColor="black"

@@ -1,25 +1,33 @@
 ﻿using Fit_Fitness_Client.Models;
+
+
 namespace Fit_Fitness_Client;
 
 public partial class App : Application
 {
-	public App()
-	{
+    public App()
+    {
         InitializeComponent();
 
         Client.MakeClientTable();
         ClientClasses.MakeClientClassesTable();
 
-
+        Application.Current.MainPage = new AppShell();
         if (Preferences.ContainsKey("UserLoggedIn"))
         {
-            MainPage = new NavigationPage(new DashboardPage());
+            GoToMainPage();
         }
         else
         {
             MainPage = new NavigationPage(new Signin());
 
         }
-	}
+
+
+    }
+     public static void GoToMainPage()
+    {
+        Application.Current.MainPage =  new AppShell();
+    }
 }
 

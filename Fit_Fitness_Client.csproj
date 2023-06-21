@@ -62,10 +62,12 @@
 	  <None Remove="Services\" />
 	  <None Remove="Models\" />
 	  <None Remove=".env" />
+	  <None Remove="Platforms\Android\Resources\mipmap\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Services\" />
 	  <Folder Include="Models\" />
+	  <Folder Include="Platforms\Android\Resources\mipmap\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <EmbeddedResource Include=".env">

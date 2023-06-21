@@ -16,18 +16,18 @@ public partial class Signin: ContentPage
     }
 
 
-    async void SignIn_Clicked(object sender, EventArgs e)
+    void SignIn_Clicked(object sender, EventArgs e)
     {
 
         if (isValid(username.Text, password.Text))
         {
 
             Preferences.Set("UserLoggedIn", true);
-            await Navigation.PushAsync(new DashboardPage());
+            App.GoToMainPage();
         }
         else
         {
-            await DisplayAlert("Error", "Invalid Credentials", "OK");
+            DisplayAlert("Error", "Invalid Credentials", "OK");
         }
 
 

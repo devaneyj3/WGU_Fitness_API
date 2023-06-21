@@ -43,13 +43,13 @@ public partial class DashboardPage : ContentPage
         cListView.ItemsSource = clientFitnessClassesList;
 
         // change label text based on class list count
-        if (fitnessClassesList.Count > 0)
+        if (clientFitnessClassesList.Count > 0)
         {
-            clHeaderLb.Text = $"There are {fitnessClassesList.Count} total classes";
+            clHeaderLb.Text = $"You are enrolled in {clientFitnessClassesList.Count} classes";
         }
         else
         {
-            clHeaderLb.Text = "There are no classes";
+            clHeaderLb.Text = "You are not enrolled in any classes";
         }
 
 
@@ -70,10 +70,7 @@ public partial class DashboardPage : ContentPage
         }
         cListView.SelectedItem = null;
     }
-
-
-
-    async void SignOut_Clicked(object sender, EventArgs e)
+    async void OnSignOutClicked(object sender, EventArgs e)
     {
         {
             bool response = await DisplayAlert("Sign Out", $"Are you sure you want to sign out?", "Yes", "No");
@@ -86,4 +83,5 @@ public partial class DashboardPage : ContentPage
             }
         }
     }
+
 }

@@ -1,25 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fit_Fitness_Client.DashboardPage"
-             Title="Dashboard"
-             NavigationPage.HasBackButton="False">
-
-     <ContentPage.ToolbarItems>
-        
-        <ToolbarItem Text="Sign Out" Clicked="OnSignOutClicked"/>
-    </ContentPage.ToolbarItems>
-
-    <VerticalStackLayout Margin="20">
-        <Label
-            x:Name="welcomeLb"
-            Text="Welcome Jordan"
-            FontAttributes="Bold"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             x:Class="Fit_Fitness_Client.SearchPage"
+             Title="SearchPage">
+   <VerticalStackLayout Margin="20">
         <Label
             x:Name="clHeaderLb"
-            Text="You are not currently teaching classes"
             Margin="20"
             VerticalOptions="Center"
             HorizontalOptions="Center"/>
