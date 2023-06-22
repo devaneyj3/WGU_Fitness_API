@@ -65,18 +65,14 @@ namespace Fit_Fitness_Client.Services
         #endregion
 
         #region Get Fitness Classes
-        public static List<FitnessClass> GetFitnessClasses(string tableName, string instructorId = null)
+        public static List<FitnessClass> GetOpenFitnessClasses(string tableName, string instructorId = null)
         {
             List<FitnessClass> list = new List<FitnessClass>();
             using (var connection = DatabaseConnection.OpenConnection(connectionString))
             {
                 string query = "";
-                if (!string.IsNullOrEmpty(instructorId))
-                {
-                    query = $"SELECT * FROM {tableName} WHERE instructor_id = {instructorId}";
-                }
 
-                query = $"SELECT * FROM {tableName}";
+                query = $"SELECT * FROM {tableName} WHERE enrollment < capacity";
 
                 using (var command = new NpgsqlCommand(query, connection))
                 {

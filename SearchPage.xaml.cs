@@ -18,14 +18,14 @@ public partial class SearchPage : ContentPage
 
 
         //all fitness classes
-        List<FitnessClass> fitnessClassesList = DatabaseServices.GetFitnessClasses("fitness_classes");
+        List<FitnessClass> fitnessClassesList = DatabaseServices.GetOpenFitnessClasses("fitness_classes");
 
         cCollectionView.ItemsSource = fitnessClassesList;
 
         // change label text based on class list count
         if (fitnessClassesList.Count > 0)
         {
-            clHeaderLb.Text = $"There are {fitnessClassesList.Count} classes";
+            clHeaderLb.Text = $"There are {fitnessClassesList.Count} classes with open spots";
         }
         else
         {

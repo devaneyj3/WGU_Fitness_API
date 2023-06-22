@@ -25,8 +25,16 @@ partial class ClassDetail : ContentPage
         if (isClientEnrolled)
         {
             ReserveClass.IsVisible = false;
-            enrolledLb.IsVisible = true;
+            infoLb.IsVisible = true;
             WithdrawalBtn.IsVisible = true;
+        }
+        //disable reserve button if enrolled equals cap
+        if(fitnessClass.Capacity == fitnessClass.Enrollment)
+        {
+            ReserveClass.IsEnabled = false;
+            infoLb.IsVisible = true;
+            infoLb.Text = "This class is full";
+
         }
     }
 
@@ -34,7 +42,7 @@ partial class ClassDetail : ContentPage
 
     async void ReserveClass_Clicked(object sender, EventArgs e)
     {
-        var response = await DisplayAlert("Delete", $"Do you want to withdraw from {selectedName}", "Yes", "No");
+        var response = await DisplayAlert("Reserve", $"Do you want to reserve a spot in {selectedName}", "Yes", "No");
 
         if (response == true)
         {
@@ -73,7 +81,7 @@ partial class ClassDetail : ContentPage
 
     async void WithdrawalBtn_Clicked(System.Object sender, System.EventArgs e)
     {
-        var response = await DisplayAlert("Delete", $"Do you want to reserve a spot in {selectedName}", "Yes", "No");
+        var response = await DisplayAlert("Delete", $"Do you want to withdraw a from {selectedName}", "Yes", "No");
 
         if (response == true)
         {
@@ -98,15 +106,15 @@ partial class ClassDetail : ContentPage
 
             if (isSucessfull)
             {
-                await DisplayAlert("Successfull", "Withdrwaled from class", "OK");
+                await DisplayAlert("Successfull", "Withdrew from class", "OK");
                 ReserveClass.IsVisible = true;
-                enrolledLb.IsVisible = false;
+                infoLb.IsVisible = false;
                 WithdrawalBtn.IsVisible = false;
                 await Navigation.PopAsync();
             }
             else
             {
-                await DisplayAlert("Error", "There was an error withdrawaling from fitness classes", "OK");
+                await DisplayAlert("Error", "There was an error withdrawing from fitness classes", "OK");
             }
             await Navigation.PopAsync();
 
