@@ -16,7 +16,7 @@
 
 
         <!-- CollectionView -->
-        <CollectionView x:Name="cCollectionView" ItemsLayout="VerticalList" SelectionMode="Single" SelectionChanged="cCollectionView_SelectionChanged">
+        <CollectionView x:Name="cCollectionView" ItemsLayout="VerticalList" SelectionMode="Single" SelectionChanged="cCollectionView_SelectionChanged" HorizontalScrollBarVisibility="Always">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="5" CornerRadius="5" BorderColor="LightGray">
