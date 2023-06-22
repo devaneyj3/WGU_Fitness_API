@@ -25,7 +25,7 @@ public partial class DashboardPage : ContentPage
             Client.SignedInClientName = name;
             Client.SignedInClientEmail = email;
             Client.SignedInClientPhone = phone;
-            
+            welcomeLb.Text = $"Welcome {name}";
 
         }
         else

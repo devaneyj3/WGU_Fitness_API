@@ -21,6 +21,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -34,7 +35,7 @@
 
                             <Label Text="Date:" Grid.Column="0" Grid.Row="1"/>
                             <Label Grid.Column="1"
-                               Grid.Row="2"
+                               Grid.Row="1"
                                FontAttributes="Italic"
                                HorizontalOptions="CenterAndExpand">
                                 <Label.Text>
@@ -45,8 +46,12 @@
                                 </Label.Text>
                             </Label>
                             <Label Text="Location:" Grid.Column="0" Grid.Row="2"/>
-                            <Label Grid.Column="2" Grid.Row="1"
+                            <Label Grid.Column="1" Grid.Row="2"
                                Text="{Binding Location}"
+                               FontAttributes="Italic" />
+                            <Label Text="Instructor:" Grid.Column="0" Grid.Row="3"/>
+                            <Label Grid.Column="1" Grid.Row="3"
+                               Text="{Binding InstructorName}"
                                FontAttributes="Italic" />
                         </Grid>
                     </Frame>

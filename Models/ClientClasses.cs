@@ -32,7 +32,7 @@ namespace Fit_Fitness_Client.Models
                 string query = "";
 
 
-                query = $"SELECT * FROM fitness_classes JOIN client_classes ON fitness_classes.id = client_classes.class_id WHERE client_classes.client_id = @client_id";
+                query = $"SELECT * FROM fitness_classes JOIN client_classes ON fitness_classes.id = client_classes.class_id JOIN instructors ON fitness_classes.instructor_id = instructors.id WHERE client_classes.client_id = @client_id";
 
 
                 using (var command = new NpgsqlCommand(query, connection))

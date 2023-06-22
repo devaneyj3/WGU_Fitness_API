@@ -15,9 +15,6 @@
         <Tab Title="Search Classes">
             <ShellContent ContentTemplate="{DataTemplate local:SearchPage}" />
         </Tab>
-        <Tab Title="Sign Out">
-            <ShellContent ContentTemplate="{DataTemplate local:DashboardPage}" />
-        </Tab>
         <!-- Additional Tabs Here -->
       <!--<MenuItem Text="Sign Out" Clicked="OnSignOutClicked" />-->
     </TabBar>

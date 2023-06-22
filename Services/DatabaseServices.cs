@@ -72,7 +72,7 @@ namespace Fit_Fitness_Client.Services
             {
                 string query = "";
 
-                query = $"SELECT * FROM {tableName} WHERE enrollment < capacity";
+                query = $"SELECT * FROM {tableName} JOIN instructors ON instructors.id = fitness_classes.instructor_id WHERE enrollment < capacity";
 
                 using (var command = new NpgsqlCommand(query, connection))
                 {
