@@ -4,6 +4,10 @@
              x:Class="Fit_Fitness_Client.SearchPage"
              Title="Search">
     <VerticalStackLayout Margin="20">
+        <VerticalStackLayout>
+
+            <Entry x:Name="searchBar" Placeholder="Search by Class" TextChanged="searchBar_TextChanged" />
+        </VerticalStackLayout>
         <Label
             x:Name="clHeaderLb"
             Margin="20"
@@ -28,7 +32,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <Label Text="Name:" Grid.Column="0" Grid.Row="0"/>
+                            <Label Text="Class:" Grid.Column="0" Grid.Row="0"/>
                             <Label Grid.Column="1" Grid.Row="0"
                                Text="{Binding Name}"
                                FontAttributes="Italic" />

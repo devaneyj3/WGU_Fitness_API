@@ -5,6 +5,8 @@ namespace Fit_Fitness_Client;
 
 public partial class SearchPage : ContentPage
 {
+    //all fitness classes
+    List<FitnessClass> fitnessClassesList = DatabaseServices.GetOpenFitnessClasses("fitness_classes");
     public SearchPage()
     {
         InitializeComponent();
@@ -14,11 +16,6 @@ public partial class SearchPage : ContentPage
     {
         base.OnAppearing();
 
-
-
-
-        //all fitness classes
-        List<FitnessClass> fitnessClassesList = DatabaseServices.GetOpenFitnessClasses("fitness_classes");
 
         cCollectionView.ItemsSource = fitnessClassesList;
 
@@ -48,4 +45,10 @@ public partial class SearchPage : ContentPage
         cCollectionView.SelectedItem = null;
     }
 
+    void searchBar_TextChanged(Object sender, TextChangedEventArgs e)
+    {
+        var searchTerm = searchBar.Text;
+        
+        cCollectionView.ItemsSource = fitnessClassesList.FindAll((fc => fc.Name.Contains(searchTerm)));
+    }
 }
