@@ -47,8 +47,8 @@ public partial class SearchPage : ContentPage
 
     void searchBar_TextChanged(Object sender, TextChangedEventArgs e)
     {
-        var searchTerm = searchBar.Text;
+        var searchTerm = searchBar.Text.ToUpper();
         
-        cCollectionView.ItemsSource = fitnessClassesList.FindAll((fc => fc.Name.Contains(searchTerm)));
+        cCollectionView.ItemsSource = fitnessClassesList.FindAll((fc => fc.Name.ToUpper().Contains(searchTerm)));
     }
 }

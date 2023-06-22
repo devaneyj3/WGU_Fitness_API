@@ -81,8 +81,8 @@ public partial class DashboardPage : ContentPage
 
     void searchBar_TextChanged(Object sender, TextChangedEventArgs e)
     {
-        var searchTerm = searchBar.Text;
+        var searchTerm = searchBar.Text.ToUpper();
 
-        cCollectionView.ItemsSource = clientFitnessClassesList.FindAll((fc => fc.Name.Contains(searchTerm)));
+        cCollectionView.ItemsSource = clientFitnessClassesList.FindAll((fc => fc.Name.ToUpper().Contains(searchTerm)));
     }
 }
