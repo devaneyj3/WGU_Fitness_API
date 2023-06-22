@@ -1,30 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fit_Fitness_Client.ClassDetail"
              Title="Class Detail">
-    <VerticalStackLayout>
-        <Grid Padding="50" x:Name="ClassView" ColumnSpacing="1" RowSpacing="20" BackgroundColor="WhiteSmoke" >
+    <VerticalStackLayout
+        Margin="70">
+
+        <Grid x:Name="fitnessClassGrid" RowSpacing="10" ColumnSpacing="30">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="2*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0"
-                Grid.Column="0"
-                   
-                           Text="{Binding Name}"
-                           FontAttributes="Bold" />
-            <Label
-                           Grid.Column="1"
-                          FontAttributes="Italic"
-                           VerticalOptions="End"
-                                    HorizontalOptions="CenterAndExpand">
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                 <Label.Text>
                     <MultiBinding StringFormat="{}{0:M/dd/yy hh:mm tt} - {1:M/dd/yy hh:mm tt}">
                         <Binding Path="Start"/>
@@ -32,27 +32,41 @@
                     </MultiBinding>
                 </Label.Text>
             </Label>
-            <Label Grid.Row="1"
-                           Grid.Column="0"
-                           Text="{Binding Location}"
-                           FontAttributes="Italic"
-                           VerticalOptions="End" />
 
-            <Label
-                                    Grid.Row="2"
-                                    Grid.Column="0"
-                           Text="{Binding Capacity}"
-                           FontAttributes="Bold" />
-            <Label
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                           Text="{Binding Enrollment}"
-                           FontAttributes="Bold" />
+            <Label Grid.Row="1" Grid.Column="0" Text="Class" FontAttributes="Bold" />
+            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Name}" FontAttributes="Bold" />
+
+
+
+            <Label Grid.Row="2" Grid.Column="0" Text="Location" FontAttributes="Bold" />
+            <Label Grid.Row="2" Grid.Column="1" Text="{Binding Location}" FontAttributes="Italic" />
+
+            <Label Grid.Row="3" Grid.Column="0" Text="Capacity" FontAttributes="Bold" />
+            <Label Grid.Row="3" Grid.Column="1" Text="{Binding Capacity}" FontAttributes="Bold" />
+
+            <Label Grid.Row="4" Grid.Column="0" Text="Enrollment" FontAttributes="Bold" />
+            <Label Grid.Row="4" Grid.Column="1" Text="{Binding Enrollment}" FontAttributes="Bold" />
+
+            <Label Grid.Row="5" Grid.Column="0" Text="Instructor Name" FontAttributes="Bold" />
+            <Label Grid.Row="5" Grid.Column="1" Text="{Binding InstructorName}" FontAttributes="Bold" />
+
+            <Label Grid.Row="6" Grid.Column="0" Text="Instructor Email" FontAttributes="Bold" />
+            <Label Grid.Row="6" Grid.Column="1" Text="{Binding InstructorEmail}" FontAttributes="Bold" />
+
+            <Label Grid.Row="7" Grid.Column="0" Text="Instructor Phone" FontAttributes="Bold" />
+            <Label Grid.Row="7" Grid.Column="1" Text="{Binding InstructorPhone}" FontAttributes="Bold" />
+            <Label Grid.Row="8" Grid.Column="0" Text="Details" FontAttributes="Bold" />
+            <Label Grid.Row="8" Grid.Column="1" Text="{Binding Details}" FontAttributes="Bold" />
 
         </Grid>
 
-        <Button x:Name="ReserveClass" Text="Reserve Class" Clicked="ReserveClass_Clicked"/>
+
+
         <Label x:Name="infoLb" Text="You are already enrolled" HorizontalTextAlignment="Center" Margin="50"  FontSize="Large" IsVisible="false"/>
-        <Button x:Name="WithdrawalBtn" Text="Withdraw" BackgroundColor="Red" Margin="20" IsVisible="false" Clicked="WithdrawalBtn_Clicked"/>
+
+        <Button x:Name="ReserveClass" Text="Reserve Class" Clicked="ReserveClass_Clicked" Margin="0, 50,0,0"/>
+        <Button x:Name="WithdrawalBtn" Text="Withdraw" BackgroundColor="Red" IsVisible="false" Clicked="WithdrawalBtn_Clicked" Margin="0, 50,0,0"/>
+
+
     </VerticalStackLayout>
 </ContentPage>

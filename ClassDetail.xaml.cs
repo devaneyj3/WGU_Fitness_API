@@ -9,18 +9,30 @@ partial class ClassDetail : ContentPage
 {
     int selectedId = 0;
     string selectedName = "";
+    int enrollment = 0;
+    int capacity = 0;
+    
 
     public ClassDetail(FitnessClass fitnessClass)
     {
         InitializeComponent();
 
         FitnessClass.SelectedId = fitnessClass.Id;
-        ClassView.BindingContext = fitnessClass;
+        fitnessClassGrid.BindingContext = fitnessClass;
         selectedId = fitnessClass.Id;
         selectedName = fitnessClass.Name;
 
+        capacity = fitnessClass.Capacity;
+        enrollment = fitnessClass.Enrollment;
+    }
+
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
         //
-        bool isClientEnrolled = ClientClasses.IsEnrolled(fitnessClass.Id);
+        bool isClientEnrolled = ClientClasses.IsEnrolled(selectedId);
 
         if (isClientEnrolled)
         {
@@ -29,7 +41,7 @@ partial class ClassDetail : ContentPage
             WithdrawalBtn.IsVisible = true;
         }
         //disable reserve button if enrolled equals cap
-        if(fitnessClass.Capacity == fitnessClass.Enrollment)
+        if (capacity == enrollment)
         {
             ReserveClass.IsEnabled = false;
             infoLb.IsVisible = true;
@@ -37,9 +49,6 @@ partial class ClassDetail : ContentPage
 
         }
     }
-
-
-
     async void ReserveClass_Clicked(object sender, EventArgs e)
     {
         var response = await DisplayAlert("Reserve", $"Do you want to reserve a spot in {selectedName}", "Yes", "No");
@@ -107,9 +116,6 @@ partial class ClassDetail : ContentPage
             if (isSucessfull)
             {
                 await DisplayAlert("Successfull", "Withdrew from class", "OK");
-                ReserveClass.IsVisible = true;
-                infoLb.IsVisible = false;
-                WithdrawalBtn.IsVisible = false;
                 await Navigation.PopAsync();
             }
             else

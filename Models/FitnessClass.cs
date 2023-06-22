@@ -5,7 +5,9 @@ namespace Fit_Fitness_Client.Models
 	public class FitnessClass
 	{
         public static int SelectedId = 0;
-        
+        public static object SelectedClass = null;
+
+
         public int Id { get; set; }
 
         public string Name { get; set; }
