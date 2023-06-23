@@ -1,89 +1,129 @@
-const db = require('../data/db.config');
+const {
+	FITNESS_CLASSES_TABLE,
+	FITNESS_CLASSES,
+	CLIENTS_CLASSES,
+} = require("../contants");
+const db = require("../data/db.config");
 
 module.exports = {
-    getFromDB,
-    addData,
-    clearDatabase,
-    find,
-    findByID,
-    deleteByID,
-    edit,
-    getIdClasses,
-    instructorPostClasses,
-    editClasses,
-    addClassToClient,
-    incrementClassAttendees
-}
+	getFromDB,
+	addData,
+	clearDatabase,
+	find,
+	findByID,
+	deleteByID,
+	edit,
+	getIdClasses,
+	instructorPostClasses,
+	editClasses,
+	addClassToClient,
+	incrementClassAttendees,
+};
 
 //reusable get function to retreive data from all databases
 function getFromDB(dbName) {
-    return db(dbName)
+	return db(dbName);
 }
 
 //POST data to the database
 function addData(text, object) {
-    console.log('inserting data', object)
-    return db(text).insert(object)
+	console.log("inserting data", object);
+	return db(text).insert(object);
 }
 
 function find(name, object) {
-    return db(name).where({ 'username': object }).first()
+	return db(name).where({ username: object }).first();
 }
 function findByID(name, id) {
-    return db(name).where({ 'id': id }).first()
+	return db(name).where({ id: id }).first();
 }
 function deleteByID(name, id) {
-    console.log(id)
-    return db(name).where({ 'id': id }).del()
+	console.log(id);
+	return db(name).where({ id: id }).del();
 }
 function edit(name, id, username, password) {
-    const data = db(name).where({ 'id': id }).update({ 'username': username, 'password': password })
-    return data
+	const data = db(name)
+		.where({ id: id })
+		.update({ username: username, password: password });
+	return data;
 }
 
 function getIdClasses(text, id) {
-    if (text === 'instructors') {
-        return db('instructors as i')
-            .join("classes as c", 'i.id', `c.instructor_id`)
-            .select('c.id', 'c.name', 'c.type', 'c.startTime', 'c.duration', 'c.intensityLevel', 'c.location', 'c.attendees', 'c.maxClassSize')
-            .where('c.instructor_id', id)
-    } else {
-        return db('clients as c')
-            .join("clients_classes as cc", 'cc.client_id', 'c.id')
-            .join("classes as cl", "cc.class_id", "cl.id")
-            .select('cl.id', 'cl.name', 'cl.type', 'cl.instructor_name', 'cl.startTime', 'cl.duration', 'cl.intensityLevel', 'cl.location', 'cl.attendees', 'cl.maxClassSize')
-            .where('cc.client_id', id)
-    }
+	if (text === "instructors") {
+		return db("instructors as i")
+			.join("classes as c", "i.id", `c.instructor_id`)
+			.select(
+				"c.id",
+				"c.name",
+				"c.type",
+				"c.startTime",
+				"c.duration",
+				"c.intensityLevel",
+				"c.location",
+				"c.attendees",
+				"c.maxClassSize"
+			)
+			.where("c.instructor_id", id);
+	} else {
+		return db("clients as c")
+			.join("clients_classes as cc", "cc.client_id", "c.id")
+			.join("classes as cl", "cc.class_id", "cl.id")
+			.select(
+				"cl.id",
+				"cl.name",
+				"cl.type",
+				"cl.instructor_name",
+				"cl.startTime",
+				"cl.duration",
+				"cl.intensityLevel",
+				"cl.location",
+				"cl.attendees",
+				"cl.maxClassSize"
+			)
+			.where("cc.client_id", id);
+	}
 }
 
 //instructor can post classes that they teach
 function instructorPostClasses(object, id) {
-    console.log('instructorPostClasses, ', object)
-    return db('classes').insert(object).where({'id': id})
+	console.log("instructorPostClasses, ", object);
+	return db(FITNESS_CLASSES).insert(object).where({ id: id });
 }
 
-function editClasses(id, name, type, startTime, duration, intensityLevel, location, attendees, maxClassSize) {
-    const data = db('classes').where({ 'id': id }).update({
-        name,
-        type,
-        startTime,
-        duration,
-        intensityLevel,
-        location,
-        attendees,
-        maxClassSize
-    })
-    return data
+function editClasses(
+	id,
+	name,
+	details,
+	start_time,
+	end_time,
+	location,
+	enrollment,
+	capacity,
+	type
+) {
+	const data = db(FITNESS_CLASSES_TABLE).where({ id: id }).update({
+		name,
+		details,
+		location,
+		start_time,
+		end_time,
+		enrollment,
+		capacity,
+		type,
+	});
+	return data;
 }
 
 function addClassToClient(id, clasID) {
-    return db('clients_classes').insert({'client_id': id, 'class_id': clasID})
+	return db(CLIENTS_CLASSES).insert({ client_id: id, class_id: clasID });
 }
 
 function incrementClassAttendees(id) {
-    return db('classes').where({'id': id}).increment('attendees', 1 )
+	return db(FITNESS_CLASSES)
+		.where({ id: id })
+		.increment(FITNESS_CLASSES_TABLE.ENROLLMENT, 1);
 }
 
 function clearDatabase(text) {
-    return db(text).truncate()
+	return db(text).truncate();
 }
