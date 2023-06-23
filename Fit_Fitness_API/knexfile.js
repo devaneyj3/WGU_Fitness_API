@@ -4,8 +4,8 @@ module.exports = {
 		debug: true,
 		connection: {
 			host: process.env.HOST,
-			port: process.env.PORT,
-			database: process.env.DATABASE,
+			port: process.env.DB_PORT,
+			database: "fit_fitness",
 			user: process.env.USER,
 			password: process.env.PASSWORD,
 		},

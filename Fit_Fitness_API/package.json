@@ -1,10 +1,10 @@
 {
 	"name": "Fit_Fitness_API",
 	"version": "1.0.0",
-	"main": "index.js",
+	"main": "app.js",
 	"license": "MIT",
 	"scripts": {
-		"start": "nodemon ./bin/www"
+		"start": "nodemon app.js"
 	},
 	"dependencies": {
 		"bcryptjs": "^2.4.3",

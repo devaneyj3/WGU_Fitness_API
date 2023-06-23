@@ -1,4 +1,4 @@
-import { FITNESS_CLASSES, INSTRUCTORS } from "../../contants";
+const { FITNESS_CLASSES, INSTRUCTORS } = require("../../contants");
 const express = require("express");
 
 const routes = express.Router();
