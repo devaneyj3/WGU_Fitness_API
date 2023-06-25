@@ -52,6 +52,9 @@ async function login(text, req, res) {
 			res.status(200).json({
 				name: user.username,
 				message: ` Welcome ${user.username} `,
+				username: user.username,
+				email: user.email,
+				phone: user.phone,
 				id: user.id,
 				token,
 			});
