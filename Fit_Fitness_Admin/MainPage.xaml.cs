@@ -24,24 +24,21 @@ public partial class MainPage : ContentPage
             var obj = new { username = username.Text, password = password.Text };
 
 
-            var instructor = databaseService.PostData<Instructor, Instructor>(apiUrl, obj).Data;
+            var instructor = databaseService.PostData<object, Instructor>(apiUrl, obj).Data;
             if (instructor != null)
             {
 
-     ;
-                Console.WriteLine(instructor.Email); ;
+                Preferences.Set("SignedInInstructorId", instructor.id);
+                Preferences.Set("SignedInInstructorName", instructor.Name);
+                Preferences.Set("SignedInInstructorEmail", instructor.Email);
+                Preferences.Set("SignedInInstructorPhone", instructor.Phone);
 
-                //Preferences.Set("SignedInInstructorId", instructor.Id);
-                //Preferences.Set("SignedInInstructorName", instructor.Name);
-                //Preferences.Set("SignedInInstructorEmail", instructor.Email);
-                //Preferences.Set("SignedInInstructorPhone", instructor.Phone);
-
-                //Preferences.Set("UserLoggedIn", true);
-                //await Navigation.PushAsync(new DashboardPage());
+                Preferences.Set("UserLoggedIn", true);
+                await Navigation.PushAsync(new DashboardPage());
             }
             else
             {
-                //await DisplayAlert("Error", "Invalid Credentials", "OK");
+                await DisplayAlert("Error", "Invalid Credentials", "OK");
             }
 
 

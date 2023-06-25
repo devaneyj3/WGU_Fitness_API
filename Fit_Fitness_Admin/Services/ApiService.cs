@@ -1,8 +1,6 @@
-﻿using System;
+﻿
 
 using RestSharp;
-using Newtonsoft.Json;
-using System.Text.Json;
 
 namespace Fit_Fitness_Admin.Services
 {
@@ -19,6 +17,7 @@ namespace Fit_Fitness_Admin.Services
         public RestResponse<TResponse> PostData<TRequest, TResponse>(string apiUrl, object obj)
             where TRequest : class
             where TResponse : class, new()
+
         {
             var request = new RestRequest(apiUrl, Method.Post).AddJsonBody(obj);
 
