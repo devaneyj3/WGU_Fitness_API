@@ -65,9 +65,9 @@ public partial class SignUp : ContentPage
 
         var apiUrl = "http://localhost:3000/api/instructors/register";
 
-        var instructor = new Instructor(name, email, phone, username, password);
+        var instructor = new { name, email, phone, username, password };
 
-        var response = apiService.PostData<Instructor, Instructor>(apiUrl, instructor).Data;
+        var response = apiService.PostData<object, Instructor>(apiUrl, instructor).Data;
 
         if (response != null)
         {
