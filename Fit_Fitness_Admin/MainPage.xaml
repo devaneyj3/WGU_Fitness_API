@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="Fit_Fitness_Admin.MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label
+                x:Name="greet"
+                Grid.Row="0"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Text="Welcome to the Fit Fitness Admin App. Please sign in"  
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                TextColor="black"
+                />
+        <VerticalStackLayout
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan = "2"
+            >
+
+
+
+        <Entry
+            x:Name="username"
+            Placeholder="Username"
+            Completed="Username_Completed"
+                />
+        <Entry
+            Placeholder="Password"
+            x:Name="password"
+            Completed="Password_Completed"
+            IsPassword="True"/>
+            
+         <Label Text="Sign Up" HorizontalOptions="Center" TextColor="Blue" Padding="20">
+             <Label.GestureRecognizers>
+                 <TapGestureRecognizer
+                     Tapped="SignUp_Tapped"
+                     NumberOfTapsRequired="1"/>
+
+             </Label.GestureRecognizers>
+
+         </Label>
+
+        </VerticalStackLayout>
+        <Button x:Name="SignIn" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="1" HeightRequest="50" Text="Sign In" BackgroundColor="Orange" Clicked="SignIn_Clicked"/>
+    </Grid>
+
+
+</ContentPage>
+

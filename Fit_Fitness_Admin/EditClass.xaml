@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fit_Fitness_Admin.EditClass"
+             Title="Edit Class">
+     <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Edit" Text="Save" Clicked="Edit_Clicked"/>
+        <ToolbarItem x:Name="Cancel" Text="Cancel" Clicked="Cancel_Clicked"/>
+
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+
+        <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" BackgroundColor="WhiteSmoke">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" FontSize="Medium"
+                       VerticalTextAlignment="Center">Name</Label>
+            <Entry Text="{Binding Name}" x:Name="CourseName"
+                       Placeholder="Enter Course Name" Grid.Row="0" Grid.Column="1"
+                       VerticalTextAlignment="Center"/>
+
+
+            <Label Grid.Row="1" Grid.Column="0" FontSize="Medium"
+                       VerticalTextAlignment="Center">Location</Label>
+            <Entry Text="{Binding Location}" x:Name="LocationEntry"
+                       Placeholder="Enter Location" Grid.Row="1" Grid.Column="1"
+                       VerticalTextAlignment="Center"/>
+
+            <Label Grid.Row="2" Grid.Column="0" FontSize="Medium"
+                       VerticalTextAlignment="Center">Details</Label>
+
+            <Entry Grid.Row="2" Grid.Column="1" FontSize="Medium" x:Name="Details" Placeholder="Enter Details"
+                        />
+
+           
+            <Label Grid.Row="3" Grid.Column="0" FontSize="Medium"
+                       >Start Date</Label>
+
+            <DatePicker Grid.Row="3" Grid.Column="1" x:Name="startDatePicker" />
+
+            <TimePicker Grid.Row="3" Grid.Column="2" x:Name="startTimePicker" />
+
+
+            <Label Grid.Row="4" Grid.Column="0" FontSize="Medium"
+                       VerticalTextAlignment="Center">End Date</Label>
+
+             <DatePicker Grid.Row="4" Grid.Column="1" x:Name="endDatePicker" />
+
+            <TimePicker Grid.Row="4" Grid.Column="2" x:Name="endTimePicker" />
+
+            <Label Grid.Row="5" Grid.Column="0" FontSize="Medium"
+                       VerticalTextAlignment="Center">Capacity</Label>
+
+            <Entry Grid.Row="5" Grid.Column="1" Keyboard="Numeric" x:Name="Capacity" Placeholder="0"/>
+
+
+        </Grid>
+    </StackLayout>
+</ContentPage>
