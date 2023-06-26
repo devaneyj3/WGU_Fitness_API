@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cors());
 app.use(helmet());
 
-app.use("/api/classes", classesRoute);
+app.use("/api/fitness_classes", classesRoute);
 app.use("/api/clients", clientsRoute);
 app.use("/api/instructors", instructorsRoute);
 

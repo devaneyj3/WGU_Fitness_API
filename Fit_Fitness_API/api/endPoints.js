@@ -82,10 +82,11 @@ async function findUser(text, req, res) {
 async function deleteData(text, req, res) {
 	const { id } = req.params;
 	const user = await db.deleteByID(text, id);
-	console.log("deleting id");
 	try {
 		if (user) {
-			res.status(200).send(id);
+			res.status(200).json({
+				message: `${id} is deleted`,
+			});
 		} else {
 			helper.notFound(text, res);
 		}

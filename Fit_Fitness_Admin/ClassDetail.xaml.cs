@@ -7,10 +7,13 @@ partial class ClassDetail : ContentPage
     int selectedId = 0;
     string selectedName = "";
     FitnessClass fClass = null;
+    private ApiService apiService;
+
+
 
     public ClassDetail(FitnessClass fitnessClass)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
         FitnessClass.SelectedId = fitnessClass.id;
         fitnessClassGrid.BindingContext = fitnessClass;
@@ -18,7 +21,8 @@ partial class ClassDetail : ContentPage
         selectedName = fitnessClass.name;
         fClass = fitnessClass;
 
-	}
+        apiService = new ApiService();
+    }
 
     async void EditClass_Clicked(object sender, EventArgs e)
     {
@@ -27,24 +31,32 @@ partial class ClassDetail : ContentPage
 
     async void DeleteClass_Clicked(object sender, EventArgs e)
     {
-       var response = await DisplayAlert("Delete", $"Do you want to delete {selectedName}", "Yes", "No");
+        var response = await DisplayAlert("Delete", $"Do you want to delete {selectedName}", "Yes", "No");
 
         if (response == true)
         {
-            string query = $"DELETE FROM fitness_classes WHERE id ={selectedId}";
-         
+            var apiUrl = $"{FitnessClass.FitnessClassURL}/{selectedId}";
+            try
+            {
+                var deletedClass = apiService.DeleteData<object, FitnessClass>(apiUrl);
 
-            if (true)
-            {
-                await DisplayAlert("Successfull", "Fitness class deleted", "OK");
-                await Navigation.PopAsync();
+
+                // change label text based on class list count
+                if (deletedClass != null)
+                {
+                    await DisplayAlert("Successfull", "Fitness class deleted", "OK");
+                    await Navigation.PopAsync();
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "There was an error deleting fitness classes", "OK");
+                }
             }
-            else
+            catch (Exception err)
             {
-                await DisplayAlert("Error", "There was an error deleting fitness classes", "OK");
+                Console.WriteLine(err);
             }
-            await Navigation.PopAsync();
-        
         }
     }
 }

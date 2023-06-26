@@ -5,6 +5,7 @@ namespace Fit_Fitness_Admin
 {
     public class FitnessClass
     {
+        public static string FitnessClassURL = "http://localhost:3000/api/fitness_classes";
         public static int SelectedId = 0;
         public int id { get; set; }
 

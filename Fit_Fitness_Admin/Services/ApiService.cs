@@ -53,6 +53,25 @@ namespace Fit_Fitness_Admin.Services
             }
 
         }
+        public RestResponse<TResponse> DeleteData<TRequest, TResponse>(string apiUrl)
+        where TRequest : class
+        where TResponse : class, new()
+        {
+            var request = new RestRequest(apiUrl, Method.Delete);
+
+            var response = _restClient.Execute<TResponse>(request);
+            if (response.IsSuccessful)
+            {
+                return response;
+            }
+            else
+            {
+                // Handle error response
+                Console.WriteLine($"API request failed with status code: {response.StatusCode}");
+                return default;
+            }
+
+        }
 
     }
 }

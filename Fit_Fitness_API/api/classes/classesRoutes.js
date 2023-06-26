@@ -29,14 +29,14 @@ routes.get("/:id", (req, res) => {
 	endPoint.findUser(FITNESS_CLASSES, req, res);
 });
 
-routes.delete("/:id", mw.restrictedRoute, (req, res) => {
+routes.delete("/:id", (req, res) => {
 	endPoint.deleteData(FITNESS_CLASSES, req, res);
 });
 
-routes.put("/:id", mw.restrictedRoute, mw.missingClassProps, (req, res) => {
+routes.put("/:id", (req, res) => {
 	endPoint.editData(FITNESS_CLASSES, req, res);
 });
-routes.put("/:id/updateAttendees", mw.restrictedRoute, (req, res) => {
+routes.put("/:id/updateAttendees", (req, res) => {
 	endPoint.incrementAttendees(FITNESS_CLASSES, req, res);
 });
 
