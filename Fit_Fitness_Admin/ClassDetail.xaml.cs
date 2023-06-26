@@ -12,10 +12,10 @@ partial class ClassDetail : ContentPage
 	{
 		InitializeComponent();
 
-        FitnessClass.SelectedId = fitnessClass.Id;
+        FitnessClass.SelectedId = fitnessClass.id;
         fitnessClassGrid.BindingContext = fitnessClass;
-        selectedId = fitnessClass.Id;
-        selectedName = fitnessClass.Name;
+        selectedId = fitnessClass.id;
+        selectedName = fitnessClass.name;
         fClass = fitnessClass;
 
 	}

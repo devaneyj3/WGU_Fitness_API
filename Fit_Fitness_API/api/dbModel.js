@@ -51,34 +51,38 @@ function edit(name, id, username, password) {
 function getIdClasses(text, id) {
 	if (text === "instructors") {
 		return db("instructors as i")
-			.join("classes as c", "i.id", `c.instructor_id`)
+			.join("fitness_classes as c", "i.id", `c.instructor_id`)
 			.select(
 				"c.id",
 				"c.name",
-				"c.type",
-				"c.startTime",
-				"c.duration",
-				"c.intensityLevel",
 				"c.location",
-				"c.attendees",
-				"c.maxClassSize"
+				"c.details",
+				"c.instructorname",
+				"c.instructoremail",
+				"c.instructorphone",
+				"c.start_time",
+				"c.end_time",
+				"c.enrollment",
+				"c.capacity"
 			)
 			.where("c.instructor_id", id);
 	} else {
 		return db("clients as c")
 			.join("clients_classes as cc", "cc.client_id", "c.id")
-			.join("classes as cl", "cc.class_id", "cl.id")
+			.join("fitness_classes as cl", "cc.class_id", "cl.id")
 			.select(
 				"cl.id",
 				"cl.name",
-				"cl.type",
-				"cl.instructor_name",
-				"cl.startTime",
-				"cl.duration",
-				"cl.intensityLevel",
 				"cl.location",
-				"cl.attendees",
-				"cl.maxClassSize"
+				"cl.details",
+				"cl.instructorname",
+				"cl.instructoremail",
+				"cl.instructorphone",
+				"cl.start_time",
+				"cl.end_time",
+				"cl.enrollment",
+				"cl.capacity",
+				"cl.type"
 			)
 			.where("cc.client_id", id);
 	}

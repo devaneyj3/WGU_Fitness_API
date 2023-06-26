@@ -33,16 +33,17 @@ namespace Fit_Fitness_Admin.Services
             }
         }
 
-        public TResponse GetData<TRequest, TResponse>(string apiUrl)
+        //get 'all'
+        public RestResponse<List<TResponse>> GetData<TRequest, TResponse>(string apiUrl)
         where TRequest : class
-        where TResponse : class
+        where TResponse : class, new()
         {
-            var request = new RestRequest(apiUrl, Method.Post);
+            var request = new RestRequest(apiUrl, Method.Get);
 
-            var response = _restClient.Execute<TResponse>(request);
+            var response = _restClient.Execute<List<TResponse>>(request);
             if (response.IsSuccessful)
             {
-                return response.Data;
+                return response;
             }
             else
             {
@@ -50,6 +51,7 @@ namespace Fit_Fitness_Admin.Services
                 Console.WriteLine($"API request failed with status code: {response.StatusCode}");
                 return default;
             }
+
         }
 
     }

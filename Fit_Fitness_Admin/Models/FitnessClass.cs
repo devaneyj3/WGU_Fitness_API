@@ -6,39 +6,39 @@ namespace Fit_Fitness_Admin
     public class FitnessClass
     {
         public static int SelectedId = 0;
-        public int Id { get; set; }
+        public int id { get; set; }
 
-        public string Name { get; set; }
-        public string Location { get; set; }
-        public string Details { get; set; }
-        public string InstructorName { get; set; }
-        public string InstructorEmail { get; set; }
-        public string InstructorPhone { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public int Capacity { get; set; }
-        public int Enrollment { get; set; }
-        public int InstructorId { get; set; }
+        public string name { get; set; }
+        public string location { get; set; }
+        public string details { get; set; }
+        public string instructorname { get; set; }
+        public string instructoremail { get; set; }
+        public string instructorphone { get; set; }
+        public DateTime start_time { get; set; }
+        public DateTime end_time { get; set; }
+        public int enrollment { get; set; }
+        public int capacity { get; set; }
+        public int instructor_id { get; set; }
+    
 
 
         public FitnessClass()
         {
 
         }
-        public FitnessClass(int id, string name, string location, string details, string instructorName, string instructorEmail, string instructorPhone, DateTime start, DateTime end, int capacity, int enrollment, int instructorId)
+        public FitnessClass(string name, string location, string details, string instructorname, string instructoremail, string instructorphone, DateTime start_time, DateTime end_time, int enrollment, int capacity, int instructor_id)
         {
-            Id = id;
-            Name = name;
-            Location = location;
-            Details = details;
-            InstructorName = instructorName;
-            InstructorEmail = instructorEmail;
-            InstructorPhone = instructorPhone;
-            Start = start;
-            End = end;
-            Capacity = capacity;
-            Enrollment = enrollment;
-            InstructorId = instructorId;
+            this.name = name;
+            this.location = location;
+            this.details = details;
+            this.instructorname = instructorname;
+            this.instructoremail = instructoremail;
+            this.instructorphone = instructorphone;
+            this.start_time = start_time;
+            this.end_time = end_time;
+            this.enrollment = enrollment;
+            this.capacity = capacity;
+            this.instructor_id = instructor_id;
         }
       
     }

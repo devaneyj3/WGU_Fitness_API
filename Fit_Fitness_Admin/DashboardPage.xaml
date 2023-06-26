@@ -50,25 +50,25 @@
                             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0:M/dd/yy hh:mm tt} - {1:M/dd/yy hh:mm tt}">
-                                        <Binding Path="Start"/>
-                                        <Binding Path="End"/>
+                                        <Binding Path="start_time"/>
+                                        <Binding Path="end_time"/>
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>
 
                             <Label Grid.Row="1" Grid.Column="0" Text="Class" FontAttributes="Bold" />
-                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Name}" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding name}" FontAttributes="Bold" />
 
 
 
                             <Label Grid.Row="2" Grid.Column="0" Text="Location" FontAttributes="Bold" />
-                            <Label Grid.Row="2" Grid.Column="1" Text="{Binding Location}" FontAttributes="Italic" />
-
+                            <Label Grid.Row="2" Grid.Column="1" Text="{Binding location}" FontAttributes="Italic" />
+                        
                             <Label Grid.Row="3" Grid.Column="0" Text="Capacity" FontAttributes="Bold" />
-                            <Label Grid.Row="3" Grid.Column="1" Text="{Binding Capacity}" FontAttributes="Bold" />
+                            <Label Grid.Row="3" Grid.Column="1" Text="{Binding capacity}" FontAttributes="Bold" />
 
                             <Label Grid.Row="4" Grid.Column="0" Text="Enrollment" FontAttributes="Bold" />
-                            <Label Grid.Row="4" Grid.Column="1" Text="{Binding Enrollment}" FontAttributes="Bold" />
+                            <Label Grid.Row="4" Grid.Column="1" Text="{Binding enrollment}" FontAttributes="Bold" />
 
                         </Grid>
                     </Frame>

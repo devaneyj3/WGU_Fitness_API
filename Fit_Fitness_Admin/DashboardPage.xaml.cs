@@ -8,23 +8,25 @@ namespace Fit_Fitness_Admin;
 
 public partial class DashboardPage : ContentPage
 {
+    private ApiService apiService;
     List<FitnessClass> fitnessClassesList = new List<FitnessClass>();
     public DashboardPage()
     {
         InitializeComponent();
+        apiService = new ApiService();
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        
+
         if (Preferences.ContainsKey("SignedInInstructorName"))
         {
-           string name = Preferences.Get("SignedInInstructorName", string.Empty);
-           string id = Preferences.Get("SignedInInstructorId", string.Empty);
-           string email = Preferences.Get("SignedInInstructorEmail", string.Empty);
-           string phone = Preferences.Get("SignedInInstructorPhone", string.Empty);
+            string name = Preferences.Get("SignedInInstructorName", string.Empty);
+            string id = Preferences.Get("SignedInInstructorId", string.Empty);
+            string email = Preferences.Get("SignedInInstructorEmail", string.Empty);
+            string phone = Preferences.Get("SignedInInstructorPhone", string.Empty);
 
             Instructor.SignedInInstructorId = int.Parse(id);
             Instructor.SignedInInstructorName = name;
@@ -40,23 +42,30 @@ public partial class DashboardPage : ContentPage
 
         }
 
-
-
-
-       //fitnessClassGrid.ItemsSource = fitnessClassesList;
-
-        // change label text based on class list count
-         if ( fitnessClassesList.Count > 0)
+        var apiUrl = $"{Instructor.InstructorURL}/{Instructor.SignedInInstructorId.ToString()}/fitness_classes";
+        try
         {
-            clHeaderLb.Text = $"You are currently teaching {fitnessClassesList.Count} classes";
+            var fitnessClassListResponse = apiService.GetData<object, FitnessClass>(apiUrl);
+
+
+            // change label text based on class list count
+            if (fitnessClassListResponse != null)
+            {
+                fitnessClassesList = fitnessClassListResponse.Data;
+
+
+                clHeaderLb.Text = $"You are currently teaching {fitnessClassesList.Count} classes";
+                fitnessClassGrid.ItemsSource = fitnessClassesList;
+            }
+            else
+            {
+                clHeaderLb.Text = "You are not teaching any classes";
+            }
         }
-        else
+        catch (Exception err)
         {
-            clHeaderLb.Text = "You are not teaching any classes";
+            Console.WriteLine(err);
         }
-
-
-
     }
 
     async void cCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -92,6 +101,7 @@ public partial class DashboardPage : ContentPage
     void SearchBar_TextChanged(Object sender, TextChangedEventArgs e)
     {
         var searchTerm = SearchBarEntry.Text.ToUpper();
-        fitnessClassGrid.ItemsSource = fitnessClassesList.FindAll((fc => fc.Name.ToUpper().Contains(searchTerm)));
+        fitnessClassGrid.ItemsSource = fitnessClassesList.FindAll((fc => fc.name.ToUpper().Contains(searchTerm)));
     }
 }
+

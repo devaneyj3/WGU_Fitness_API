@@ -12,20 +12,20 @@ public partial class EditClass : ContentPage
     {
         InitializeComponent();
 
-        idToEdit = fitnessClass.Id;
+        idToEdit = fitnessClass.id;
         //prepopulate form
 
-        CourseName.Text = fitnessClass.Name;
+        CourseName.Text = fitnessClass.name;
 
-        startDatePicker.Date = fitnessClass.Start.Date;
-        startTimePicker.Time = new TimeSpan(fitnessClass.Start.Hour, fitnessClass.Start.Minute, 0);
+        startDatePicker.Date = fitnessClass.start_time.Date;
+        startTimePicker.Time = new TimeSpan(fitnessClass.start_time.Hour, fitnessClass.start_time.Minute, 0);
 
-        endDatePicker.Date = fitnessClass.End.Date;
-        endTimePicker.Time = new TimeSpan(fitnessClass.End.Hour, fitnessClass.End.Minute, 0);
+        endDatePicker.Date = fitnessClass.end_time.Date;
+        endTimePicker.Time = new TimeSpan(fitnessClass.end_time.Hour, fitnessClass.end_time.Minute, 0);
 
-        LocationEntry.Text = fitnessClass.Location;
-        Details.Text = fitnessClass.Details;
-        Capacity.Text = fitnessClass.Capacity.ToString();
+        LocationEntry.Text = fitnessClass.location;
+        Details.Text = fitnessClass.details;
+        Capacity.Text = fitnessClass.capacity.ToString();
 
     }
     async void Edit_Clicked(object sender, EventArgs e)

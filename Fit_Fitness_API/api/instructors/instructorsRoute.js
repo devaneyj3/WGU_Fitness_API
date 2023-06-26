@@ -21,20 +21,15 @@ routes.get("/:id", mw.restrictedRoute, (req, res) => {
 });
 
 //get individual instructors classes AND AUTHETICATE
-routes.get("/:id/classes", mw.restrictedRoute, (req, res) => {
+routes.get("/:id/fitness_classes", (req, res) => {
 	endPoint.getClassesByID(INSTRUCTORS, req, res);
 });
 
 //INSTRUCTOR CAN POST CLASSES THAT THEY TEACH AUTHENTICATE
 // TODO: THIS IS NOT POSTING IN PRODUCTION
-routes.post(
-	"/:id/classes",
-	mw.missingClassProps,
-	mw.restrictedRoute,
-	async (req, res) => {
-		endPoint.instructorsNewClasses(FITNESS_CLASSES, req, res);
-	}
-);
+routes.post("/:id/fitness_classes", async (req, res) => {
+	endPoint.instructorsNewClasses(FITNESS_CLASSES, req, res);
+});
 
 routes.delete("/:id", (req, res) => {
 	endPoint.deleteData(INSTRUCTORS, req, res);

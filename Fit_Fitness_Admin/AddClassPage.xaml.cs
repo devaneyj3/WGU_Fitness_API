@@ -1,37 +1,22 @@
-﻿using System.Linq.Expressions;
-using DotNetEnv;
+﻿
 using Fit_Fitness_Admin.Models;
 using Fit_Fitness_Admin.Services;
-using Microsoft.Maui.Controls;
-using Npgsql;
 
 namespace Fit_Fitness_Admin;
 
 public partial class AddClassPage : ContentPage
 {
-
+    ApiService ApiService;
     public AddClassPage()
     {
         InitializeComponent();
 
+        ApiService = new ApiService();
 
     }
     async void SaveCourse_Clicked(object sender, EventArgs e)
     {
-        var apiService = new ApiService();
-        var apiUrl = "https://localhost:3000/api/instructors";
-        var requestData = new { Name = "John", Age = 30 }; // Request data object
-
-        //var response = apiService.PostData<object, Instructor>(apiUrl, requestData);
-        //if (response != null)
-        //{
-        //    // Process the API response
-        //    Console.WriteLine($"API response: {response}");
-        //}
-
-
-        string Name = CourseName.Text;
-
+        string name = CourseName.Text;
         DateTime StartDate = startDatePicker.Date;
         TimeSpan StartTimePicker = startTimePicker.Time;
         DateTime combinedStartDateTime = new DateTime(StartDate.Year, StartDate.Month, StartDate.Day, StartTimePicker.Hours, StartTimePicker.Minutes, StartTimePicker.Seconds);
@@ -46,7 +31,7 @@ public partial class AddClassPage : ContentPage
         string capacity = Capacity.Text;
 
         //check if values are entered
-        if (string.IsNullOrWhiteSpace(Name))
+        if (string.IsNullOrWhiteSpace(name))
         {
 
             await DisplayAlert("Missing Name", "Please enter a name", "OK");
@@ -73,28 +58,31 @@ public partial class AddClassPage : ContentPage
             await DisplayAlert("Error", "The End Date can't be before the Start Date", "OK");
             return;
         }
-        string query = "INSERT INTO fitness_classes (name, details, location, start_time, end_time, instructorname, instructorphone, instructoremail, capacity, enrollment, instructor_id) VALUES (@name, @details, @location, @start_time, @end_time, @instructorname, @instructorphone, @instructoremail, @capacity, 0, @instructor_id)";
 
-        List<NpgsqlParameter> parameters = new List<NpgsqlParameter>
+        var apiUrl = $"{Instructor.InstructorURL}/{Instructor.SignedInInstructorId}/fitness_classes";
+        var requestData = new
         {
-        new NpgsqlParameter("@name", Name),
-        new NpgsqlParameter("@details", details),
-        new NpgsqlParameter("@location", location),
-        new NpgsqlParameter("@start_time", combinedStartDateTime),
-        new NpgsqlParameter("@end_time", combinedEndDateTime),
-        new NpgsqlParameter("@instructorname", Instructor.SignedInInstructorName),
-        new NpgsqlParameter("@instructorphone", Instructor.SignedInInstructorPhone),
-        new NpgsqlParameter("@instructoremail", Instructor.SignedInInstructorEmail),
-        new NpgsqlParameter("@capacity", int.Parse(capacity)),
-        new NpgsqlParameter("@instructor_id", Instructor.SignedInInstructorId)
-    };
-
+            name = name,
+            details = details,
+            location = location,
+            instructorname = Instructor.SignedInInstructorName,
+            instructoremail = Instructor.SignedInInstructorEmail,
+            instructorphone = Instructor.SignedInInstructorPhone,
+            start_time = combinedStartDateTime,
+            end_time = combinedEndDateTime,
+            capacity = int.Parse(capacity),
+            enrollment = 0,
+            instructor_id = Instructor.SignedInInstructorId
+        };
+        Console.WriteLine(requestData);
+        var response = ApiService.PostData<object, FitnessClass>(apiUrl, requestData).Data;
         try
         {
-
-
-            if (true)
+            if (response != null)
             {
+            //6 / 26 / 2023 12:00:00 AM in 2023 - 06 - 25T13: 45:30 format
+                // Process the API response
+                Console.WriteLine($"API response: {response}");
                 await DisplayAlert("Successfull", "Fitness class created", "OK");
                 await Navigation.PopAsync();
             }
@@ -102,6 +90,7 @@ public partial class AddClassPage : ContentPage
             {
                 await DisplayAlert("Error", "There was an error creating fitness classes", "OK");
             }
+
         }
         catch (Exception err)
         {

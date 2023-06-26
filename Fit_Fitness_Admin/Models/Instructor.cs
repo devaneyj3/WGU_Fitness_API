@@ -3,7 +3,9 @@ using Fit_Fitness_Admin.Services;
 namespace Fit_Fitness_Admin.Models
 {
     public class Instructor
+        
     {
+        public static string InstructorURL = "http://localhost:3000/api/instructors";
         public static int SignedInInstructorId { get; set; }
         public static string SignedInInstructorName { get; set; }
         public static string SignedInInstructorEmail { get; set; }

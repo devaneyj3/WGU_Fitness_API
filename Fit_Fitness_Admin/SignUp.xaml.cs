@@ -63,7 +63,7 @@ public partial class SignUp : ContentPage
         string password = Password.Text;
         string username = Username.Text;
 
-        var apiUrl = "http://localhost:3000/api/instructors/register";
+        var apiUrl = $"{Instructor.InstructorURL}/register";
 
         var instructor = new { name, email, phone, username, password };
 

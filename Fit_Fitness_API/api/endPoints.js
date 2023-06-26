@@ -146,6 +146,7 @@ async function getClassesByID(text, req, res) {
 }
 async function instructorsNewClasses(text, req, res) {
 	const { id } = req.params;
+	console.log(id, req.body);
 	const classes = await db.instructorPostClasses(req.body, id);
 	try {
 		if (classes) {

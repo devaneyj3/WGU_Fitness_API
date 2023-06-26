@@ -1,30 +1,29 @@
 ﻿
 using Fit_Fitness_Admin.Models;
 using Fit_Fitness_Admin.Services;
-using Newtonsoft.Json;
 
 namespace Fit_Fitness_Admin;
 
 public partial class MainPage : ContentPage
 {
-    private ApiService databaseService;
+    private ApiService apiService;
     public MainPage()
     {
         InitializeComponent();
         Preferences.Clear();
-        databaseService = new ApiService();
+        apiService = new ApiService();
     }
 
 
     async void SignIn_Clicked(object sender, EventArgs e)
     {
-        var apiUrl = "http://localhost:3000/api/instructors/login";
+        var apiUrl = $"{Instructor.InstructorURL}/login";
         try
         {
             var obj = new { username = username.Text, password = password.Text };
 
 
-            var instructor = databaseService.PostData<object, Instructor>(apiUrl, obj).Data;
+            var instructor = apiService.PostData<object, Instructor>(apiUrl, obj).Data;
             if (instructor != null)
             {
 
