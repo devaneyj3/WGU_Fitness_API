@@ -1,16 +1,16 @@
 ﻿
 using Fit_Fitness_Admin.Models;
 using Fit_Fitness_Admin.Services;
-using Npgsql;
-
 namespace Fit_Fitness_Admin;
 
 public partial class EditClass : ContentPage
 {
+    private ApiService apiService;
     int idToEdit = 0;
     public EditClass(FitnessClass fitnessClass)
     {
         InitializeComponent();
+        apiService = new ApiService();
 
         idToEdit = fitnessClass.id;
         //prepopulate form
@@ -30,7 +30,7 @@ public partial class EditClass : ContentPage
     }
     async void Edit_Clicked(object sender, EventArgs e)
     {
-        string Name = CourseName.Text;
+        string name = CourseName.Text;
 
         DateTime StartDate = startDatePicker.Date;
         TimeSpan StartTimePicker = startTimePicker.Time;
@@ -48,7 +48,7 @@ public partial class EditClass : ContentPage
         int capacity = int.Parse(capacityStr);
 
         //check if values are entered
-        if (string.IsNullOrWhiteSpace(Name))
+        if (string.IsNullOrWhiteSpace(name))
         {
 
             await DisplayAlert("Missing Name", "Please enter a name", "OK");
@@ -76,39 +76,51 @@ public partial class EditClass : ContentPage
             await DisplayAlert("Error", "The End Date can't be before the Start Date", "OK");
             return;
         }
-        string query = "UPDATE fitness_classes SET name = @name, details = @details, location = @location, start_time = @starttime, end_time = @endtime, capacity = @capacity WHERE id = @Id";
+        var apiUrl = $"{FitnessClass.FitnessClassURL}/{idToEdit}";
 
-
-
-        List<NpgsqlParameter> parameters = new List<NpgsqlParameter>
+        var requestData = new
         {
-
-                new NpgsqlParameter("@name", Name),
-                new NpgsqlParameter("@details", details),
-                new NpgsqlParameter("@location", location),
-                new NpgsqlParameter("@starttime", combinedStartDateTime), // Assuming StartDate is a DateTime object representing the start time.
-                new NpgsqlParameter("endtime", combinedEndDateTime),
-                new NpgsqlParameter("capacity", capacity),
-                new NpgsqlParameter("Id", idToEdit)
-
-         };
-
-
-
-        if (true)
+            name = name,
+            details = details,
+            location = location,
+            instructorname = Instructor.SignedInInstructorName,
+            instructoremail = Instructor.SignedInInstructorEmail,
+            instructorphone = Instructor.SignedInInstructorPhone,
+            start_time = combinedStartDateTime,
+            end_time = combinedEndDateTime,
+            capacity = capacity,
+            enrollment = 0,
+            type = "",
+            instructor_id = Instructor.SignedInInstructorId
+        };
+        try
         {
-            await DisplayAlert("Successfull", "Fitness class updated", "OK");
-            await Navigation.PopToRootAsync();
+            var deletedClass = apiService.UpdateData<object, FitnessClass>(apiUrl, requestData);
+
+
+            // change label text based on class list count
+            if (deletedClass != null)
+            {
+                await DisplayAlert("Successfull", "Fitness class updated", "OK");
+                Application.Current.MainPage = new NavigationPage(new DashboardPage());
+                await Navigation.PopToRootAsync();
+
+            }
+            else
+            {
+                await DisplayAlert("Error", "There was an error updating fitness classes", "OK");
+            }
         }
-        else
+        catch (Exception err)
         {
-            await DisplayAlert("Error", "There was an error updating fitness classes", "OK");
+            Console.WriteLine(err);
         }
     }
+
+
 
     void Cancel_Clicked(object sender, EventArgs e)
     {
         Navigation.PopAsync();
     }
-
 }

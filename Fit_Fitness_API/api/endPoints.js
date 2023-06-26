@@ -94,7 +94,7 @@ async function deleteData(text, req, res) {
 		helper.dbError(res);
 	}
 }
-async function editData(text, req, res, name) {
+async function editData(text, req, res) {
 	const { id } = req.params;
 	if (text === "instructors" || text === "clients") {
 		const password = await helper.hashPassword(req);
@@ -109,17 +109,8 @@ async function editData(text, req, res, name) {
 			helper.dbError(res);
 		}
 	} else {
-		let data = await db.editClasses(
-			id,
-			req.body.name,
-			req.body.type,
-			req.body.startTime,
-			req.body.duration,
-			req.body.intensityLevel,
-			req.body.location,
-			req.body.attendees,
-			req.body.maxClassSize
-		);
+		let data = await db.editClasses(id, req.body);
+		console.log("the data is", data);
 		try {
 			if (data) {
 				res.status(200).json({ message: `Changed ID: ${id}` });

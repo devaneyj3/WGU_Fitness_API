@@ -94,26 +94,21 @@ function instructorPostClasses(object, id) {
 	return db(FITNESS_CLASSES).insert(object).where({ id: id });
 }
 
-function editClasses(
-	id,
-	name,
-	details,
-	start_time,
-	end_time,
-	location,
-	enrollment,
-	capacity,
-	type
-) {
-	const data = db(FITNESS_CLASSES_TABLE).where({ id: id }).update({
-		name,
-		details,
-		location,
-		start_time,
-		end_time,
-		enrollment,
-		capacity,
-		type,
+function editClasses(id, body) {
+	console.log("req.body is, ", body);
+	const data = db(FITNESS_CLASSES).where({ id: id }).update({
+		name: body.name,
+		details: body.details,
+		location: body.location,
+		instructorname: body.instructorname,
+		instructorphone: body.instructorphone,
+		instructoremail: body.instructoremail,
+		start_time: body.start_time,
+		end_time: body.end_time,
+		enrollment: body.enrollment,
+		capacity: body.capacity,
+		type: body.type,
+		instructor_id: body.instructor_id,
 	});
 	return data;
 }

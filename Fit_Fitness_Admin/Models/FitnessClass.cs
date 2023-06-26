@@ -5,6 +5,9 @@ namespace Fit_Fitness_Admin
 {
     public class FitnessClass
     {
+        private DateTime _startTime;
+        private DateTime _endTime;
+
         public static string FitnessClassURL = "http://localhost:3000/api/fitness_classes";
         public static int SelectedId = 0;
         public int id { get; set; }
@@ -15,8 +18,16 @@ namespace Fit_Fitness_Admin
         public string instructorname { get; set; }
         public string instructoremail { get; set; }
         public string instructorphone { get; set; }
-        public DateTime start_time { get; set; }
-        public DateTime end_time { get; set; }
+        public DateTime start_time
+        {
+            get => _startTime.ToLocalTime();
+            set => _startTime = value;
+        }
+        public DateTime end_time
+        {
+            get => _endTime.ToLocalTime();
+            set => _endTime = value;
+        }
         public int enrollment { get; set; }
         public int capacity { get; set; }
         public int instructor_id { get; set; }
