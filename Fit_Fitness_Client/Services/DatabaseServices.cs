@@ -1,99 +1,89 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Xaml;
-using Npgsql;
-using Fit_Fitness_Client.Models;
-
+﻿using RestSharp;
 
 namespace Fit_Fitness_Client.Services
 {
-    public class DatabaseServices
+
+    public static class DatabaseServices
     {
+        private static RestClient _restClient = new RestClient();
 
-        static string connectionString = DatabaseConnection.LoadENV();
+        public static RestResponse<TResponse> PostData<TRequest, TResponse>(string apiUrl, object obj)
+            where TRequest : class
+            where TResponse : class, new()
 
-        #region create, update and delete operations
-
-        public static bool ExecuteNonQuery(string query, List<NpgsqlParameter> parameters = null)
         {
+            var request = new RestRequest(apiUrl, Method.Post).AddJsonBody(obj);
 
-            using (var connection = DatabaseConnection.OpenConnection(connectionString))
+            var response = _restClient.Execute<TResponse>(request);
+            if (response.IsSuccessful)
             {
-
-                // Execute create query
-                bool isSuccessfull = DatabaseConnection.ExecuteQuery(query, connection, parameters);
-                if (isSuccessfull)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-
+                return response;
+            }
+            else
+            {
+                // Handle error response
+                throw new Exception($"API request failed with status code: {response.StatusCode}");
             }
         }
-        #endregion
-        #region Get Clients
-        public static List<Client> GetClients()
+
+        //get 'all'
+        public static RestResponse<List<TResponse>> GetData<TRequest, TResponse>(string apiUrl)
+        where TRequest : class
+        where TResponse : class, new()
         {
-            List<Client> list = new List<Client>();
-            using (var connection = DatabaseConnection.OpenConnection(connectionString))
+            var request = new RestRequest(apiUrl, Method.Get);
+
+            var response = _restClient.Execute<List<TResponse>>(request);
+            if (response.IsSuccessful)
             {
-                string query = $"SELECT * FROM clients";
-
-                using (var command = new NpgsqlCommand(query, connection))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Client client = new Client(reader.GetInt32(reader.GetOrdinal("Id")), reader.GetString(reader.GetOrdinal("name")), reader.GetString(reader.GetOrdinal("email")), reader.GetString(reader.GetOrdinal("phone")), reader.GetString(reader.GetOrdinal("username")), reader.GetString(reader.GetOrdinal("password"))
-                            );
-                            list.Add(client);
-                        }
-                    }
-                }
-
+                return response;
             }
-            return list;
-        }
-        #endregion
+            else
+            {
+                // Handle error response
+                Console.WriteLine($"API request failed with status code: {response.StatusCode}");
+                return default;
+            }
 
-        #region Get Fitness Classes
-        public static List<FitnessClass> GetOpenFitnessClasses(string tableName, string instructorId = null)
+        }
+        public static RestResponse<TResponse> DeleteData<TRequest, TResponse>(string apiUrl)
+        where TRequest : class
+        where TResponse : class, new()
         {
-            List<FitnessClass> list = new List<FitnessClass>();
-            using (var connection = DatabaseConnection.OpenConnection(connectionString))
+            var request = new RestRequest(apiUrl, Method.Delete);
+
+            var response = _restClient.Execute<TResponse>(request);
+            if (response.IsSuccessful)
             {
-                string query = "";
-
-                query = $"SELECT * FROM {tableName} JOIN instructors ON instructors.id = fitness_classes.instructor_id WHERE enrollment < capacity";
-
-                using (var command = new NpgsqlCommand(query, connection))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            FitnessClass fitnessClass = new FitnessClass(reader.GetInt32(reader.GetOrdinal("Id")), reader.GetString(reader.GetOrdinal("name")), reader.GetString(reader.GetOrdinal("location")), reader.GetString(reader.GetOrdinal("details")), reader.GetString(reader.GetOrdinal("instructorname")), reader.GetString(reader.GetOrdinal("instructoremail")), reader.GetString(reader.GetOrdinal("instructorphone")), reader.GetDateTime(reader.GetOrdinal("start_time")), reader.GetDateTime(reader.GetOrdinal("end_time")), reader.GetInt32(reader.GetOrdinal("capacity")), reader.GetInt32(reader.GetOrdinal("enrollment")),
-                      reader.GetInt32(reader.GetOrdinal("instructor_id"))
-                        );
-
-                            list.Add(fitnessClass);
-                        }
-                    }
-                }
-
+                return response;
             }
-            return list;
+            else
+            {
+                // Handle error response
+                Console.WriteLine($"API request failed with status code: {response.StatusCode}");
+                return default;
+            }
+
         }
-        #endregion
-   
+        public static RestResponse<TResponse> UpdateData<TRequest, TResponse>(string apiUrl, object body)
+        where TRequest : class
+        where TResponse : class, new()
+        {
+            var request = new RestRequest(apiUrl, Method.Put).AddJsonBody(body);
+
+            var response = _restClient.Execute<TResponse>(request);
+            if (response.IsSuccessful)
+            {
+                return response;
+            }
+            else
+            {
+                // Handle error response
+                Console.WriteLine($"API request failed with status code: {response.StatusCode}");
+                return default;
+            }
+
+        }
+
     }
-
 }

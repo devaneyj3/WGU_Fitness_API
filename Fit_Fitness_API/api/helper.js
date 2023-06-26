@@ -18,6 +18,7 @@ function notFound(text, res) {
 }
 
 async function hashPassword(req) {
+	console.log("In helper, ", req.body.password);
 	const hashedPassword = await bcrypt.hashSync(req.body.password, 10);
 	req.body.password = hashedPassword;
 	return req.body.password;

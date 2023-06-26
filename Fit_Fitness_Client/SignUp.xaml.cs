@@ -1,7 +1,6 @@
 ﻿
 using Fit_Fitness_Client.Models;
 using Fit_Fitness_Client.Services;
-using Npgsql;
 
 
 namespace Fit_Fitness_Client;
@@ -63,32 +62,24 @@ public partial class SignUp : ContentPage
         string password = Password.Text;
         string username = Username.Text;
 
-        // Hash the password with the salt
-        string hashedPassword = PasswordHasher.HashPassword(password);
 
-        string query = "INSERT INTO Clients (name, phone, email, username, password) VALUES (@name, @phone, @email, @username, @hashedPassword)";
+        var apiUrl = $"{Client.clientURL}/register";
 
-        List<NpgsqlParameter> parameters = new List<NpgsqlParameter>
+        var client = new { name, email, phone, username, password };
+
+        var response = DatabaseServices.PostData<object, Client>(apiUrl, client).Data;
+
+        if (response != null)
         {
-            new NpgsqlParameter("@name", name),
-            new NpgsqlParameter("@phone", phone),
-            new NpgsqlParameter("@email", email),
-            new NpgsqlParameter("@username", username),
-            new NpgsqlParameter("@hashedPassword", hashedPassword)
-        };
+            // Process the API response
 
-        bool isSeccesful = DatabaseServices.ExecuteNonQuery(query, parameters);
-
-        if (isSeccesful)
-        {
             await DisplayAlert("Successfull", "User created", "OK");
             await Navigation.PopAsync();
+
         }
         else
         {
             await DisplayAlert("Error", "There was an error creating user", "OK");
         }
-
-
     }
 }

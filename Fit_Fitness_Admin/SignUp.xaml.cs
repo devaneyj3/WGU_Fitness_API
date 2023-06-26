@@ -81,9 +81,5 @@ public partial class SignUp : ContentPage
         {
             await DisplayAlert("Error", "There was an error creating user", "OK");
         }
-
-
-
-
     }
 }

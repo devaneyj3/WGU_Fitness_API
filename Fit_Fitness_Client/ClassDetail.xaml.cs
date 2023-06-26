@@ -17,13 +17,13 @@ partial class ClassDetail : ContentPage
     {
         InitializeComponent();
 
-        FitnessClass.SelectedId = fitnessClass.Id;
+        FitnessClass.SelectedId = fitnessClass.id;
         fitnessClassGrid.BindingContext = fitnessClass;
-        selectedId = fitnessClass.Id;
-        selectedName = fitnessClass.Name;
+        selectedId = fitnessClass.id;
+        selectedName = fitnessClass.name;
 
-        capacity = fitnessClass.Capacity;
-        enrollment = fitnessClass.Enrollment;
+        capacity = fitnessClass.capacity;
+        enrollment = fitnessClass.enrollment;
     }
 
 
@@ -32,22 +32,22 @@ partial class ClassDetail : ContentPage
         base.OnAppearing();
 
         //
-        bool isClientEnrolled = ClientClasses.IsEnrolled(selectedId);
+        //bool isClientEnrolled = ClientClasses.IsEnrolled(selectedId);
 
-        if (isClientEnrolled)
-        {
-            ReserveClass.IsVisible = false;
-            infoLb.IsVisible = true;
-            WithdrawalBtn.IsVisible = true;
-        }
-        //disable reserve button if enrolled equals cap
-        if (capacity == enrollment)
-        {
-            ReserveClass.IsEnabled = false;
-            infoLb.IsVisible = true;
-            infoLb.Text = "This class is full";
+        //if (isClientEnrolled)
+        //{
+        //    ReserveClass.IsVisible = false;
+        //    infoLb.IsVisible = true;
+        //    WithdrawalBtn.IsVisible = true;
+        //}
+        ////disable reserve button if enrolled equals cap
+        //if (capacity == enrollment)
+        //{
+        //    ReserveClass.IsEnabled = false;
+        //    infoLb.IsVisible = true;
+        //    infoLb.Text = "This class is full";
 
-        }
+        //}
     }
     async void ReserveClass_Clicked(object sender, EventArgs e)
     {
@@ -55,26 +55,12 @@ partial class ClassDetail : ContentPage
 
         if (response == true)
         {
-            string query = "UPDATE fitness_classes SET enrollment = enrollment + 1 WHERE id = @id";
+            //string query = "UPDATE fitness_classes SET enrollment = enrollment + 1 WHERE id = @id";
 
-            var addClassToClient = "INSERT INTO client_classes(client_id, class_id) VALUES(@client_id, @class_id)";
+            //var addClassToClient = "INSERT INTO client_classes(client_id, class_id) VALUES(@client_id, @class_id)";
 
 
-            List<NpgsqlParameter> classToClientParameters = new List<NpgsqlParameter>
-            {
-                new NpgsqlParameter("@client_id", Client.SignedInClientId),
-                new NpgsqlParameter("@class_id", FitnessClass.SelectedId)
-
-            };
-            DatabaseServices.ExecuteNonQuery(addClassToClient, classToClientParameters);
-            List<NpgsqlParameter> ReserveParameters = new List<NpgsqlParameter>
-            {
-                new NpgsqlParameter("@id", FitnessClass.SelectedId),
-
-            };
-            bool isSucessfull = DatabaseServices.ExecuteNonQuery(query, ReserveParameters);
-
-            if (isSucessfull)
+            if (true)
             {
                 await DisplayAlert("Successfull", "Fitness class reserved", "OK");
                 await Navigation.PopAsync();
@@ -94,26 +80,13 @@ partial class ClassDetail : ContentPage
 
         if (response == true)
         {
-            string query = "UPDATE fitness_classes SET enrollment = enrollment - 1 WHERE id = @id";
+            //string query = "UPDATE fitness_classes SET enrollment = enrollment - 1 WHERE id = @id";
 
-            var addClassToClient = "DELETE FROM client_classes WHERE client_id = @client_id AND class_id = @class_id";
+            //var addClassToClient = "DELETE FROM client_classes WHERE client_id = @client_id AND class_id = @class_id";
 
 
-            List<NpgsqlParameter> classToClientParameters = new List<NpgsqlParameter>
-            {
-                new NpgsqlParameter("@client_id", Client.SignedInClientId),
-                new NpgsqlParameter("@class_id", FitnessClass.SelectedId)
-
-            };
-            DatabaseServices.ExecuteNonQuery(addClassToClient, classToClientParameters);
-            List<NpgsqlParameter> ReserveParameters = new List<NpgsqlParameter>
-            {
-                new NpgsqlParameter("@id", FitnessClass.SelectedId),
-
-            };
-            bool isSucessfull = DatabaseServices.ExecuteNonQuery(query, ReserveParameters);
-
-            if (isSucessfull)
+           
+            if (true)
             {
                 await DisplayAlert("Successfull", "Withdrew from class", "OK");
                 await Navigation.PopAsync();

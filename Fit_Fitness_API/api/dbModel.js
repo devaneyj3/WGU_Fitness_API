@@ -27,7 +27,6 @@ function getFromDB(dbName) {
 
 //POST data to the database
 function addData(text, object) {
-	console.log("inserting data", object);
 	return db(text).insert(object);
 }
 
@@ -90,12 +89,10 @@ function getIdClasses(text, id) {
 
 //instructor can post classes that they teach
 function instructorPostClasses(object, id) {
-	console.log("instructorPostClasses, ", object);
 	return db(FITNESS_CLASSES).insert(object).where({ id: id });
 }
 
 function editClasses(id, body) {
-	console.log("req.body is, ", body);
 	const data = db(FITNESS_CLASSES).where({ id: id }).update({
 		name: body.name,
 		details: body.details,

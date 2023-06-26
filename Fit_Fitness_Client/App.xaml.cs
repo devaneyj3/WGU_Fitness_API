@@ -9,9 +9,7 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        Client.MakeClientTable();
-        ClientClasses.MakeClientClassesTable();
-
+     
         Application.Current.MainPage = new AppShell();
         if (Preferences.ContainsKey("UserLoggedIn"))
         {

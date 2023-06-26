@@ -1,42 +1,58 @@
 ﻿using System;
+using Fit_Fitness_Client.Services;
 
-namespace Fit_Fitness_Client.Models
+namespace Fit_Fitness_Client
 {
-	public class FitnessClass
-	{
+    public class FitnessClass
+    {
+        private DateTime _startTime;
+        private DateTime _endTime;
+
+        public static string FitnessClassURL = "http://localhost:3000/api/fitness_classes";
         public static int SelectedId = 0;
-        public static object SelectedClass = null;
+        public int id { get; set; }
 
-
-        public int Id { get; set; }
-
-        public string Name { get; set; }
-        public string Location { get; set; }
-        public string Details { get; set; }
-        public string InstructorName { get; set; }
-        public string InstructorEmail { get; set; }
-        public string InstructorPhone { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public int Capacity { get; set; }
-        public int Enrollment { get; set; }
-        public int InstructorId { get; set; }
-
-        public FitnessClass(int id, string name, string location, string details, string instructorName, string instructorEmail, string instructorPhone, DateTime start, DateTime end, int capacity, int enrollment, int instructorId)
+        public string name { get; set; }
+        public string location { get; set; }
+        public string details { get; set; }
+        public string instructorname { get; set; }
+        public string instructoremail { get; set; }
+        public string instructorphone { get; set; }
+        public DateTime start_time
         {
-            Id = id;
-            Name = name;
-            Location = location;
-            Details = details;
-            InstructorName = instructorName;
-            InstructorEmail = instructorEmail;
-            InstructorPhone = instructorPhone;
-            Start = start;
-            End = end;
-            Capacity = capacity;
-            Enrollment = enrollment;
-            InstructorId = instructorId;
+            get => _startTime.ToLocalTime();
+            set => _startTime = value;
         }
+        public DateTime end_time
+        {
+            get => _endTime.ToLocalTime();
+            set => _endTime = value;
+        }
+        public int enrollment { get; set; }
+        public int capacity { get; set; }
+        public int instructor_id { get; set; }
+
+
+
+        public FitnessClass()
+        {
+
+        }
+        public FitnessClass(string name, string location, string details, string instructorname, string instructoremail, string instructorphone, DateTime start_time, DateTime end_time, int enrollment, int capacity, int instructor_id)
+        {
+            this.name = name;
+            this.location = location;
+            this.details = details;
+            this.instructorname = instructorname;
+            this.instructoremail = instructoremail;
+            this.instructorphone = instructorphone;
+            this.start_time = start_time;
+            this.end_time = end_time;
+            this.enrollment = enrollment;
+            this.capacity = capacity;
+            this.instructor_id = instructor_id;
+        }
+
     }
 }
 

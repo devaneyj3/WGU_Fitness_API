@@ -45,6 +45,7 @@ async function register(text, req, res) {
 async function login(text, req, res) {
 	const { password, username } = req.body;
 	const user = await db.find(text, username);
+	console.log("user", username, text, user);
 	try {
 		if (user && bcrypt.compareSync(password, user.password)) {
 			const title = text === "clients" ? "client" : "instructor";

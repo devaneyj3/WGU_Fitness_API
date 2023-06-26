@@ -5,7 +5,7 @@ namespace Fit_Fitness_Client;
 
 public partial class DashboardPage : ContentPage
 {
-    List<FitnessClass> clientFitnessClassesList = null;
+    List<FitnessClass> clientFitnessClassesList = new List<FitnessClass>();
     public DashboardPage()
     {
         InitializeComponent();
@@ -36,22 +36,26 @@ public partial class DashboardPage : ContentPage
         }
 
 
-        //
-        clientFitnessClassesList = ClientClasses.GetClientClasses();
-
-        // change label text based on class list count
-        if (clientFitnessClassesList.Count > 0)
+        var apiUrl = $"{FitnessClass.FitnessClassURL}";
+        try
         {
-            clHeaderLb.Text = $"You are enrolled in {clientFitnessClassesList.Count} classes";
-        cCollectionView.ItemsSource = clientFitnessClassesList;
+            var fitnessClassListResponse = DatabaseServices.GetData<object, FitnessClass>(apiUrl);
+
+            // change label text based on class list count
+            if (clientFitnessClassesList.Count > 0)
+            {
+                clHeaderLb.Text = $"You are enrolled in {clientFitnessClassesList.Count} classes";
+                cCollectionView.ItemsSource = clientFitnessClassesList;
+            }
+            else
+            {
+                clHeaderLb.Text = "You are not enrolled in any classes";
+            }
         }
-        else
+        catch (Exception err)
         {
-            clHeaderLb.Text = "You are not enrolled in any classes";
+            Console.WriteLine(err);
         }
-
-
-
     }
 
     void cCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -83,6 +87,6 @@ public partial class DashboardPage : ContentPage
     {
         var searchTerm = searchBar.Text.ToUpper();
 
-        cCollectionView.ItemsSource = clientFitnessClassesList.FindAll((fc => fc.Name.ToUpper().Contains(searchTerm)));
+        cCollectionView.ItemsSource = clientFitnessClassesList.FindAll((fc => fc.name.ToUpper().Contains(searchTerm)));
     }
 }

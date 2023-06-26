@@ -6,7 +6,8 @@ namespace Fit_Fitness_Client;
 public partial class SearchPage : ContentPage
 {
     //all fitness classes
-    List<FitnessClass> fitnessClassesList = DatabaseServices.GetOpenFitnessClasses("fitness_classes");
+
+    List<FitnessClass> clientFitnessClassesList = new List<FitnessClass>();
     public SearchPage()
     {
         InitializeComponent();
@@ -16,21 +17,30 @@ public partial class SearchPage : ContentPage
     {
         base.OnAppearing();
 
-
-        cCollectionView.ItemsSource = fitnessClassesList;
-
-        // change label text based on class list count
-        if (fitnessClassesList.Count > 0)
+        var apiUrl = $"{FitnessClass.FitnessClassURL}";
+        try
         {
-            clHeaderLb.Text = $"There are {fitnessClassesList.Count} classes with open spots";
+            var fitnessClassListResponse = DatabaseServices.GetData<object, FitnessClass>(apiUrl);
+
+
+            // change label text based on class list count
+            if (fitnessClassListResponse != null)
+            {
+                clientFitnessClassesList = fitnessClassListResponse.Data;
+
+
+                clHeaderLb.Text = $"There are {clientFitnessClassesList.Count} classes with open spots";
+                cCollectionView.ItemsSource = clientFitnessClassesList;
+            }
+            else
+            {
+                clHeaderLb.Text = $"There are {clientFitnessClassesList.Count} classes with open spots";
+            }
         }
-        else
+        catch (Exception err)
         {
-            clHeaderLb.Text = "There are no classes";
+            Console.WriteLine(err);
         }
-
-
-
     }
 
     void cCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -48,7 +58,7 @@ public partial class SearchPage : ContentPage
     void searchBar_TextChanged(Object sender, TextChangedEventArgs e)
     {
         var searchTerm = searchBar.Text.ToUpper();
-        
-        cCollectionView.ItemsSource = fitnessClassesList.FindAll((fc => fc.Name.ToUpper().Contains(searchTerm)));
+
+        cCollectionView.ItemsSource = clientFitnessClassesList.FindAll((fc => fc.name.ToUpper().Contains(searchTerm)));
     }
 }
