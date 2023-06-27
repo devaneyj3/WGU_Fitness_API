@@ -3,6 +3,7 @@ namespace Fit_Fitness_Client.Models
 {
     public class Client
     {
+        public static List<FitnessClass> clientFitnessClassesList = new List<FitnessClass>();
         public static int SignedInClientId = 0;
         public static string SignedInClientName = "";
         public static string SignedInClientEmail = "";

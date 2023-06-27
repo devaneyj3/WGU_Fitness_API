@@ -118,6 +118,10 @@ function incrementClassAttendees(id) {
 	return db(FITNESS_CLASSES).where({ id: id }).increment("enrollment", 1);
 }
 
+function decrementClassAttendees(id) {
+	return db(FITNESS_CLASSES).where({ id: id }).decrement("enrollment", 1);
+}
+
 function clearDatabase(text) {
 	return db(text).truncate();
 }

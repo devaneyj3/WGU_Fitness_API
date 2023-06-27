@@ -5,7 +5,7 @@ namespace Fit_Fitness_Client;
 
 public partial class DashboardPage : ContentPage
 {
-    List<FitnessClass> clientFitnessClassesList = new List<FitnessClass>();
+   
     public DashboardPage()
     {
         InitializeComponent();
@@ -13,10 +13,10 @@ public partial class DashboardPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        if (clientFitnessClassesList.Count > 0)
+        if (Client.clientFitnessClassesList.Count > 0)
         {
 
-            clHeaderLb.Text = $"You are enrolled in {clientFitnessClassesList.Count} classes";
+            clHeaderLb.Text = $"You are enrolled in {Client.clientFitnessClassesList.Count} classes";
         }
         else
         {
@@ -52,8 +52,8 @@ public partial class DashboardPage : ContentPage
             // change label text based on class list count
             if (fitnessClassListResponse != null)
             {
-                clientFitnessClassesList = fitnessClassListResponse.Data;
-                cCollectionView.ItemsSource = clientFitnessClassesList;
+                Client.clientFitnessClassesList = fitnessClassListResponse.Data;
+                cCollectionView.ItemsSource = Client.clientFitnessClassesList;
             }
         }
         catch (Exception err)
@@ -91,6 +91,6 @@ public partial class DashboardPage : ContentPage
     {
         var searchTerm = searchBar.Text.ToUpper();
 
-        cCollectionView.ItemsSource = clientFitnessClassesList.FindAll((fc => fc.name.ToUpper().Contains(searchTerm)));
+        cCollectionView.ItemsSource = Client.clientFitnessClassesList.FindAll((fc => fc.name.ToUpper().Contains(searchTerm)));
     }
 }

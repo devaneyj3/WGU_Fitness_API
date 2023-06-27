@@ -181,4 +181,18 @@ async function incrementAttendees(text, req, res) {
 	} catch {
 		helper.dbError(res);
 	}
+
+	async function decrementAttendees(text, req, res) {
+		const { id } = req.params;
+		const data = await db.decrementClassAttendees(id);
+		try {
+			if (data) {
+				res.status(200).json({ message: "The class has been updated" });
+			} else {
+				helper.notFound(text, res);
+			}
+		} catch {
+			helper.dbError(res);
+		}
+	}
 }

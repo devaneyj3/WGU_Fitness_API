@@ -31,23 +31,22 @@ partial class ClassDetail : ContentPage
     {
         base.OnAppearing();
 
-        //
-        //bool isClientEnrolled = ClientClasses.IsEnrolled(selectedId);
+        var isClientEnrolled = Client.clientFitnessClassesList.Find((clientClass) => clientClass.id == selectedId);
 
-        //if (isClientEnrolled)
-        //{
-        //    ReserveClass.IsVisible = false;
-        //    infoLb.IsVisible = true;
-        //    WithdrawalBtn.IsVisible = true;
-        //}
-        ////disable reserve button if enrolled equals cap
-        //if (capacity == enrollment)
-        //{
-        //    ReserveClass.IsEnabled = false;
-        //    infoLb.IsVisible = true;
-        //    infoLb.Text = "This class is full";
+        if (isClientEnrolled != null)
+        {
+            ReserveClass.IsVisible = false;
+            infoLb.IsVisible = true;
+            WithdrawalBtn.IsVisible = true;
+        }
+        //disable reserve button if enrolled equals cap
+        if (capacity == enrollment)
+        {
+            ReserveClass.IsEnabled = false;
+            infoLb.IsVisible = true;
+            infoLb.Text = "This class is full";
 
-        //}
+        }
     }
     async void ReserveClass_Clicked(object sender, EventArgs e)
     {

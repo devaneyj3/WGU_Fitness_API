@@ -40,4 +40,8 @@ routes.put("/:id/updateAttendees", (req, res) => {
 	endPoint.incrementAttendees(FITNESS_CLASSES, req, res);
 });
 
+routes.put("/:id/decrementAttendees", (req, res) => {
+	endPoint.decrementAttendees(FITNESS_CLASSES, req, res);
+});
+
 module.exports = routes;
