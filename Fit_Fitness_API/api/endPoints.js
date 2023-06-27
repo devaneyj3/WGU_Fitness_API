@@ -174,7 +174,7 @@ async function incrementAttendees(text, req, res) {
 	const data = await db.incrementClassAttendees(id);
 	try {
 		if (data) {
-			res.status(200).send(id);
+			res.status(200).json({ message: "The class has been updated" });
 		} else {
 			helper.notFound(text, res);
 		}

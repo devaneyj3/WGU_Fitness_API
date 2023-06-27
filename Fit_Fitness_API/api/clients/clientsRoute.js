@@ -25,7 +25,7 @@ routes.get(`/:id/${FITNESS_CLASSES}`, (req, res) => {
 });
 
 //CLIENT PICKS UP CLASSES THAT IS IN CLASSES DATABASE
-routes.post(`/:id/${FITNESS_CLASSES}:classID`, (req, res) => {
+routes.post(`/:id/${FITNESS_CLASSES}/:classID`, (req, res) => {
 	endPoint.addClientClass(req, res);
 });
 

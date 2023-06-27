@@ -55,22 +55,27 @@ partial class ClassDetail : ContentPage
 
         if (response == true)
         {
-            //string query = "UPDATE fitness_classes SET enrollment = enrollment + 1 WHERE id = @id";
+            //add client to class
+            var addClassApiUrl = $"{Client.clientURL}/{Client.SignedInClientId}/fitness_classes/{selectedId}";
+            var isAdded = DatabaseServices.AddClassToClient<object, FitnessClass>(addClassApiUrl).Data;
 
-            //var addClassToClient = "INSERT INTO client_classes(client_id, class_id) VALUES(@client_id, @class_id)";
 
+            //update class enrollment
+            var updateClassEnrollmentApiUrl = $"{FitnessClass.FitnessClassURL}/{selectedId}/updateAttendees";
+            var isEnrollmentUpdated = DatabaseServices.UpdateEnrollment<object, FitnessClass>(updateClassEnrollmentApiUrl).Data;
 
-            if (true)
+            if (isAdded != null && isEnrollmentUpdated != null)
             {
+                // Process the API response
+
                 await DisplayAlert("Successfull", "Fitness class reserved", "OK");
                 await Navigation.PopAsync();
+
             }
             else
             {
                 await DisplayAlert("Error", "There was an error reserving fitness classes", "OK");
             }
-            await Navigation.PopAsync();
-
         }
     }
 

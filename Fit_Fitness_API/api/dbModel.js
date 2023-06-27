@@ -110,14 +110,12 @@ function editClasses(id, body) {
 	return data;
 }
 
-function addClassToClient(id, clasID) {
-	return db(CLIENTS_CLASSES).insert({ client_id: id, class_id: clasID });
+function addClassToClient(id, classID) {
+	return db(CLIENTS_CLASSES).insert({ client_id: id, class_id: classID });
 }
 
 function incrementClassAttendees(id) {
-	return db(FITNESS_CLASSES)
-		.where({ id: id })
-		.increment(FITNESS_CLASSES_TABLE.ENROLLMENT, 1);
+	return db(FITNESS_CLASSES).where({ id: id }).increment("enrollment", 1);
 }
 
 function clearDatabase(text) {

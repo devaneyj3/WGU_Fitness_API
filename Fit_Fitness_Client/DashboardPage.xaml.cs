@@ -13,7 +13,15 @@ public partial class DashboardPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        if (clientFitnessClassesList.Count > 0)
+        {
 
+            clHeaderLb.Text = $"You are enrolled in {clientFitnessClassesList.Count} classes";
+        }
+        else
+        {
+            clHeaderLb.Text = "You are not enrolled in any classes";
+        }
 
         if (Preferences.ContainsKey("SignedInClientName"))
         {
@@ -36,20 +44,16 @@ public partial class DashboardPage : ContentPage
         }
 
 
-        var apiUrl = $"{FitnessClass.FitnessClassURL}";
+        var apiUrl = $"{Client.clientURL}/{Client.SignedInClientId}/fitness_classes";
         try
         {
             var fitnessClassListResponse = DatabaseServices.GetData<object, FitnessClass>(apiUrl);
 
             // change label text based on class list count
-            if (clientFitnessClassesList.Count > 0)
+            if (fitnessClassListResponse != null)
             {
-                clHeaderLb.Text = $"You are enrolled in {clientFitnessClassesList.Count} classes";
+                clientFitnessClassesList = fitnessClassListResponse.Data;
                 cCollectionView.ItemsSource = clientFitnessClassesList;
-            }
-            else
-            {
-                clHeaderLb.Text = "You are not enrolled in any classes";
             }
         }
         catch (Exception err)
