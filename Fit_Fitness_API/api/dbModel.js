@@ -18,6 +18,8 @@ module.exports = {
 	editClasses,
 	addClassToClient,
 	incrementClassAttendees,
+	decrementClassAttendees,
+	removeClassFromClient,
 };
 
 //reusable get function to retreive data from all databases
@@ -112,6 +114,10 @@ function editClasses(id, body) {
 
 function addClassToClient(id, classID) {
 	return db(CLIENTS_CLASSES).insert({ client_id: id, class_id: classID });
+}
+
+function removeClassFromClient(id, classID) {
+	return db(CLIENTS_CLASSES).where({ client_id: id, class_id: classID }).del();
 }
 
 function incrementClassAttendees(id) {

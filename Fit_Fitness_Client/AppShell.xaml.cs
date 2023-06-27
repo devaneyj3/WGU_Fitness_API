@@ -4,8 +4,8 @@ public partial class AppShell : Shell
 {
 	public AppShell()
 	{
-		InitializeComponent();
-	}
+        InitializeComponent();
+    }
     async void OnSignOutClicked(object sender, EventArgs e)
     {
         {

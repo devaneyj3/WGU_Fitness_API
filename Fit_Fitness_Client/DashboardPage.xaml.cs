@@ -13,16 +13,6 @@ public partial class DashboardPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        if (Client.clientFitnessClassesList.Count > 0)
-        {
-
-            clHeaderLb.Text = $"You are enrolled in {Client.clientFitnessClassesList.Count} classes";
-        }
-        else
-        {
-            clHeaderLb.Text = "You are not enrolled in any classes";
-        }
-
         if (Preferences.ContainsKey("SignedInClientName"))
         {
             string name = Preferences.Get("SignedInClientName", string.Empty);
@@ -60,6 +50,16 @@ public partial class DashboardPage : ContentPage
         {
             Console.WriteLine(err);
         }
+        if (Client.clientFitnessClassesList.Count > 0)
+        {
+
+            clHeaderLb.Text = $"You are enrolled in {Client.clientFitnessClassesList.Count} classes";
+        }
+        else
+        {
+            clHeaderLb.Text = "You are not enrolled in any classes";
+        }
+
     }
 
     void cCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

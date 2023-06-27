@@ -15,6 +15,8 @@ module.exports = {
 	instructorsNewClasses,
 	addClientClass,
 	incrementAttendees,
+	removeClientClass,
+	decrementCourseAttendees,
 };
 
 async function getEndPoint(text, res) {
@@ -155,12 +157,28 @@ async function addClientClass(req, res) {
 	const { id } = req.params;
 	const { classID } = req.params;
 	const classes = await db.addClassToClient(id, classID);
-	console.log(classes);
 	try {
 		if (classes) {
 			res
 				.status(200)
 				.send({ message: `Class ID: ${classID} successfully added` });
+		} else {
+			helper.notFound(text, res);
+		}
+	} catch {
+		helper.dbError(res);
+	}
+}
+
+async function removeClientClass(req, res) {
+	const { id } = req.params;
+	const { classID } = req.params;
+	const classes = await db.removeClassFromClient(id, classID);
+	try {
+		if (classes) {
+			res
+				.status(200)
+				.json({ message: `Class ID: ${classID} successfully remove` });
 		} else {
 			helper.notFound(text, res);
 		}
@@ -181,18 +199,18 @@ async function incrementAttendees(text, req, res) {
 	} catch {
 		helper.dbError(res);
 	}
+}
 
-	async function decrementAttendees(text, req, res) {
-		const { id } = req.params;
-		const data = await db.decrementClassAttendees(id);
-		try {
-			if (data) {
-				res.status(200).json({ message: "The class has been updated" });
-			} else {
-				helper.notFound(text, res);
-			}
-		} catch {
-			helper.dbError(res);
+async function decrementCourseAttendees(text, req, res) {
+	const { id } = req.params;
+	const data = await db.decrementClassAttendees(id);
+	try {
+		if (data) {
+			res.status(200).json({ message: "The class has been updated" });
+		} else {
+			helper.notFound(text, res);
 		}
+	} catch {
+		helper.dbError(res);
 	}
 }

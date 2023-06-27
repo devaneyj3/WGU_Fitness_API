@@ -36,12 +36,12 @@ routes.delete("/:id", (req, res) => {
 routes.put("/:id", (req, res) => {
 	endPoint.editData(FITNESS_CLASSES, req, res);
 });
-routes.put("/:id/updateAttendees", (req, res) => {
+routes.put("/:id/incrementAttendees", (req, res) => {
 	endPoint.incrementAttendees(FITNESS_CLASSES, req, res);
 });
 
 routes.put("/:id/decrementAttendees", (req, res) => {
-	endPoint.decrementAttendees(FITNESS_CLASSES, req, res);
+	endPoint.decrementCourseAttendees(FITNESS_CLASSES, req, res);
 });
 
 module.exports = routes;

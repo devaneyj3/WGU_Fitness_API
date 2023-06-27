@@ -29,6 +29,11 @@ routes.post(`/:id/${FITNESS_CLASSES}/:classID`, (req, res) => {
 	endPoint.addClientClass(req, res);
 });
 
+//remove classes from client on withdraw
+routes.delete(`/:id/${FITNESS_CLASSES}/:classID/remove`, (req, res) => {
+	endPoint.removeClientClass(req, res);
+});
+
 routes.delete("/:id", mw.restrictedRoute, (req, res) => {
 	endPoint.deleteData(CLIENTS, req, res);
 });

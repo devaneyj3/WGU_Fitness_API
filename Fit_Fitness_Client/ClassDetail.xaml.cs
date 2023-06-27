@@ -11,7 +11,7 @@ partial class ClassDetail : ContentPage
     string selectedName = "";
     int enrollment = 0;
     int capacity = 0;
-    
+
 
     public ClassDetail(FitnessClass fitnessClass)
     {
@@ -60,7 +60,7 @@ partial class ClassDetail : ContentPage
 
 
             //update class enrollment
-            var updateClassEnrollmentApiUrl = $"{FitnessClass.FitnessClassURL}/{selectedId}/updateAttendees";
+            var updateClassEnrollmentApiUrl = $"{FitnessClass.FitnessClassURL}/{selectedId}/incrementAttendees";
             var isEnrollmentUpdated = DatabaseServices.UpdateEnrollment<object, FitnessClass>(updateClassEnrollmentApiUrl).Data;
 
             if (isAdded != null && isEnrollmentUpdated != null)
@@ -68,7 +68,12 @@ partial class ClassDetail : ContentPage
                 // Process the API response
 
                 await DisplayAlert("Successfull", "Fitness class reserved", "OK");
-                await Navigation.PopAsync();
+
+                // Navigate to root of "Search Classes" to clear its stack:
+                await Shell.Current.Navigation.PopToRootAsync();
+                //await Shell.Current.GoToAsync("//searchclasses/searchpage");
+
+                //await Shell.Current.GoToAsync("///myclasses");
 
             }
             else
@@ -84,23 +89,38 @@ partial class ClassDetail : ContentPage
 
         if (response == true)
         {
-            //string query = "UPDATE fitness_classes SET enrollment = enrollment - 1 WHERE id = @id";
+            //delete client from class
+            var deleteClassFromClientApiUrl = $"{Client.clientURL}/{Client.SignedInClientId}/fitness_classes/{selectedId}/remove";
+            var deletedClass = DatabaseServices.DeleteData<object, FitnessClass>(deleteClassFromClientApiUrl).Data;
 
-            //var addClassToClient = "DELETE FROM client_classes WHERE client_id = @client_id AND class_id = @class_id";
 
+            //update class enrollment
+            var updateClassEnrollmentApiUrl = $"{FitnessClass.FitnessClassURL}/{selectedId}/decrementAttendees";
+            var isEnrollmentUpdated = DatabaseServices.UpdateEnrollment<object, FitnessClass>(updateClassEnrollmentApiUrl).Data;
 
-           
-            if (true)
+            if (deletedClass != null && isEnrollmentUpdated != null)
             {
-                await DisplayAlert("Successfull", "Withdrew from class", "OK");
-                await Navigation.PopAsync();
+                // Process the API response
+
+                await DisplayAlert("Successfull", "You withdrew from class", "OK");
+
+
+                // Navigate to root of "Search Classes" to clear its stack:
+                await Shell.Current.Navigation.PopToRootAsync();
+                //await Shell.Current.GoToAsync("//searchclasses/searchpage");
+
+                //await Shell.Current.GoToAsync("///myclasses");
+
+
+
+
             }
             else
             {
-                await DisplayAlert("Error", "There was an error withdrawing from fitness classes", "OK");
+                await DisplayAlert("Error", "There was an error withdrawing fitness classes", "OK");
             }
-            await Navigation.PopAsync();
-
         }
+
     }
 }
+
