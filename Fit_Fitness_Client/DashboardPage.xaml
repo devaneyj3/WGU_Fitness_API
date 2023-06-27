@@ -42,7 +42,7 @@
 
                             <Label Text="Class:" Grid.Column="0" Grid.Row="0"/>
                             <Label Grid.Column="1" Grid.Row="0"
-                               Text="{Binding Name}"
+                               Text="{Binding name}"
                                FontAttributes="Italic" />
 
                             <Label Text="Date:" Grid.Column="0" Grid.Row="1"/>
@@ -52,18 +52,18 @@
                                HorizontalOptions="CenterAndExpand">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0:M/dd/yy hh:mm tt} - {1:M/dd/yy hh:mm tt}">
-                                        <Binding Path="Start"/>
-                                        <Binding Path="End"/>
+                                        <Binding Path="start_time"/>
+                                        <Binding Path="end_time"/>
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>
                             <Label Text="Location:" Grid.Column="0" Grid.Row="2"/>
                             <Label Grid.Column="1" Grid.Row="2"
-                               Text="{Binding Location}"
+                               Text="{Binding location}"
                                FontAttributes="Italic" />
                             <Label Text="Instructor:" Grid.Column="0" Grid.Row="3"/>
                             <Label Grid.Column="1" Grid.Row="3"
-                               Text="{Binding InstructorName}"
+                               Text="{Binding instructorname}"
                                FontAttributes="Italic" />
                         </Grid>
                     </Frame>
