@@ -31,6 +31,9 @@ partial class ClassDetail : ContentPage
     {
         base.OnAppearing();
 
+        //get latest client classes data when reserving class or withdrawing
+        ClientClasses.GetClientClasses();
+
         var isClientEnrolled = Client.clientFitnessClassesList.Find((clientClass) => clientClass.id == selectedId);
 
         if (isClientEnrolled != null)
@@ -69,11 +72,9 @@ partial class ClassDetail : ContentPage
 
                 await DisplayAlert("Successfull", "Fitness class reserved", "OK");
 
-                // Navigate to root of "Search Classes" to clear its stack:
-                await Shell.Current.Navigation.PopToRootAsync();
-                //await Shell.Current.GoToAsync("//searchclasses/searchpage");
 
-                //await Shell.Current.GoToAsync("///myclasses");
+                await Shell.Current.Navigation.PopToRootAsync();
+
 
             }
             else
@@ -105,13 +106,7 @@ partial class ClassDetail : ContentPage
                 await DisplayAlert("Successfull", "You withdrew from class", "OK");
 
 
-                // Navigate to root of "Search Classes" to clear its stack:
                 await Shell.Current.Navigation.PopToRootAsync();
-                //await Shell.Current.GoToAsync("//searchclasses/searchpage");
-
-                //await Shell.Current.GoToAsync("///myclasses");
-
-
 
 
             }
