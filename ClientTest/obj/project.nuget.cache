@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "dgSpecHash": "HBWnVBVjfrFvcawKZtkdpAw3j4IHPR/T+BPBLBA0OGqNu2XJQ40HujmiLhpgiRlbPd08IrhhKR0liTvHO28uuw==",
+  "success": true,
+  "projectFilePath": "/Users/jordandevaney/Desktop/d424-software-engineering-capstone/ClientTest/ClientTest.csproj",
+  "expectedPackageFiles": [
+    "/Users/jordandevaney/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.codecoverage/17.6.3/microsoft.codecoverage.17.6.3.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.extensions.configuration/7.0.0/microsoft.extensions.configuration.7.0.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.extensions.configuration.abstractions/7.0.0/microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.extensions.dependencyinjection/7.0.0/microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/7.0.0/microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.extensions.logging/7.0.0/microsoft.extensions.logging.7.0.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.maui.graphics/7.0.86/microsoft.maui.graphics.7.0.86.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.net.test.sdk/17.6.3/microsoft.net.test.sdk.17.6.3.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.testplatform.objectmodel/17.6.3/microsoft.testplatform.objectmodel.17.6.3.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/microsoft.testplatform.testhost/17.6.3/microsoft.testplatform.testhost.17.6.3.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/netstandard.library/2.0.0/netstandard.library.2.0.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/nuget.frameworks/6.5.0/nuget.frameworks.6.5.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/nunit/3.13.3/nunit.3.13.3.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/nunit.analyzers/3.6.1/nunit.analyzers.3.6.1.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/nunit3testadapter/4.5.0/nunit3testadapter.4.5.0.nupkg.sha512",
+    "/Users/jordandevaney/.nuget/packages/system.reflection.metadata/1.6.0/system.reflection.metadata.1.6.0.nupkg.sha512"
+  ],
+  "logs": []
+}
