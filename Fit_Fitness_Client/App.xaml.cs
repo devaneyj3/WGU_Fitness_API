@@ -9,7 +9,13 @@ public partial class App : Application
     {
         InitializeComponent();
 
-     
+
+        Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Production");
+
+
+
+        string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        Console.WriteLine($"ASPNETCORE_ENVIRONMENT: {environment}");
         Application.Current.MainPage = new AppShell();
         if (Preferences.ContainsKey("UserLoggedIn"))
         {

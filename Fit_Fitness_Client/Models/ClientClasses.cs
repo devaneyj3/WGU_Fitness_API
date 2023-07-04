@@ -13,6 +13,7 @@ namespace Fit_Fitness_Client.Models
         public static void GetClientClasses()
         {
             var apiUrl = $"{Client.clientURL}/{Client.SignedInClientId}/fitness_classes";
+            Console.WriteLine($"Client URL is {apiUrl}");
             try
             {
                 var fitnessClassListResponse = DatabaseServices.GetData<object, FitnessClass>(apiUrl);

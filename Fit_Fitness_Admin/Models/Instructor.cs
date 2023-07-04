@@ -5,7 +5,7 @@ namespace Fit_Fitness_Admin.Models
     public class Instructor
         
     {
-        public static string InstructorURL = "http://localhost:3000/api/instructors";
+        public static string InstructorURL = $"{DatabaseConnection.ConnectionURL}instructors";
         public static int SignedInInstructorId { get; set; }
         public static string SignedInInstructorName { get; set; }
         public static string SignedInInstructorEmail { get; set; }

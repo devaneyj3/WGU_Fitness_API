@@ -12,19 +12,23 @@ module.exports = {
 		migrations: {
 			directory: "./data/migrations",
 		},
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false,
+		},
 		useNullAsDefault: true,
 	},
 
 	production: {
 		client: "postgresql",
 		debug: true,
-		connection: process.env.DATABASE_URL,
+		connection: {
+			connectionString: process.env.DATABASE_URL,
+			ssl: {
+				rejectUnauthorized: false,
+			},
+		},
 		migrations: {
 			directory: "./data/migrations",
-		},
-		ssl: {
-			rejectUnauthorized: false,
 		},
 	},
 };

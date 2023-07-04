@@ -9,7 +9,7 @@ namespace Fit_Fitness_Client.Models
         public static string SignedInClientEmail = "";
         public static string SignedInClientPhone = "";
 
-        public static string clientURL = "http://localhost:3000/api/clients";
+        public static string clientURL = $"{DatabaseConnection.ConnectionURL}clients";
 
 
         public int id { get; set; }

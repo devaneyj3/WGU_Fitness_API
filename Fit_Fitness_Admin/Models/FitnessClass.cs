@@ -1,4 +1,5 @@
 ﻿using System;
+using Fit_Fitness_Admin.Models;
 using Fit_Fitness_Admin.Services;
 
 namespace Fit_Fitness_Admin
@@ -8,7 +9,7 @@ namespace Fit_Fitness_Admin
         private DateTime _startTime;
         private DateTime _endTime;
 
-        public static string FitnessClassURL = "http://localhost:3000/api/fitness_classes";
+        public static string FitnessClassURL = $"{DatabaseConnection.ConnectionURL}fitness_classes";
         public static int SelectedId = 0;
         public int id { get; set; }
 
