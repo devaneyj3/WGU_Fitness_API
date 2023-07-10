@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NRTWm/52EvJG92E1YpG+Z5NUYYugeZ30a70HC8u4b2Pi4TOVLbyyqK6jdjA/dmOFu+OWCmkEhWRQ++AszCzqww==",
+  "dgSpecHash": "V6bHW7WA1VorxiIgVdUyWbw/cwRwEuLLE41zzAlmqOJ8Rvv7fsBck0SOqTMfK8hkwJfDkND/t6FWxI+bRU+FYQ==",
   "success": true,
-  "projectFilePath": "/Users/jordandevaney/Desktop/d424-software-engineering-capstone/ClientTest/ClientTest.csproj",
+  "projectFilePath": "/Users/jordandevaney/Desktop/d424-software-engineering-capstone-working_branch/ClientTest/ClientTest.csproj",
   "expectedPackageFiles": [
     "/Users/jordandevaney/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/jordandevaney/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",

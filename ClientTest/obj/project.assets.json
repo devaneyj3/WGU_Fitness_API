@@ -3041,11 +3041,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jordandevaney/Desktop/d424-software-engineering-capstone/ClientTest/ClientTest.csproj",
+      "projectUniqueName": "/Users/jordandevaney/Desktop/d424-software-engineering-capstone-working_branch/ClientTest/ClientTest.csproj",
       "projectName": "ClientTest",
-      "projectPath": "/Users/jordandevaney/Desktop/d424-software-engineering-capstone/ClientTest/ClientTest.csproj",
+      "projectPath": "/Users/jordandevaney/Desktop/d424-software-engineering-capstone-working_branch/ClientTest/ClientTest.csproj",
       "packagesPath": "/Users/jordandevaney/.nuget/packages/",
-      "outputPath": "/Users/jordandevaney/Desktop/d424-software-engineering-capstone/ClientTest/obj/",
+      "outputPath": "/Users/jordandevaney/Desktop/d424-software-engineering-capstone-working_branch/ClientTest/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/jordandevaney/.nuget/NuGet/NuGet.Config"
@@ -3061,8 +3061,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/Users/jordandevaney/Desktop/d424-software-engineering-capstone/Fit_Fitness_Client/Fit_Fitness_Client.csproj": {
-              "projectPath": "/Users/jordandevaney/Desktop/d424-software-engineering-capstone/Fit_Fitness_Client/Fit_Fitness_Client.csproj"
+            "/Users/jordandevaney/Desktop/d424-software-engineering-capstone-working_branch/Fit_Fitness_Client/Fit_Fitness_Client.csproj": {
+              "projectPath": "/Users/jordandevaney/Desktop/d424-software-engineering-capstone-working_branch/Fit_Fitness_Client/Fit_Fitness_Client.csproj"
             }
           }
         }

@@ -4,9 +4,13 @@
 	"main": "app.js",
 	"license": "MIT",
 	"scripts": {
+		"start": "yarn && node ./bin/www",
+		"debug": "nodemon --inspect-brk=9229 app.js",
 		"build": "docker build -t api . && docker run -p 3000:3000 api",
-		"start": "docker start",
-		"stop": "docker stop api_container "
+		"containers": "docker ps -a",
+		"stop": "docker stop api_container",
+		"rm_containers": "docker stop $(docker ps -aq) && docker rm $(docker ps -aq)",
+		"stop_running": "docker stop $(docker ps -aq)"
 	},
 	"dependencies": {
 		"bcryptjs": "^2.4.3",

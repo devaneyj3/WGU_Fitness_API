@@ -38,7 +38,7 @@ public partial class DashboardPage : ContentPage
         try
         {
             var fitnessClassListResponse = DatabaseServices.GetData<object, FitnessClass>(apiUrl);
-
+            
             // change label text based on class list count
             if (fitnessClassListResponse != null)
             {

@@ -34,11 +34,11 @@ routes.delete(`/:id/${FITNESS_CLASSES}/:classID/remove`, (req, res) => {
 	endPoint.removeClientClass(req, res);
 });
 
-routes.delete("/:id", mw.restrictedRoute, (req, res) => {
+routes.delete("/:id", (req, res) => {
 	endPoint.deleteData(CLIENTS, req, res);
 });
 
-routes.put("/:id", mw.missingProp, mw.restrictedRoute, (req, res) => {
+routes.put("/:id", mw.missingProp, (req, res) => {
 	endPoint.editData(CLIENTS, req, res);
 });
 

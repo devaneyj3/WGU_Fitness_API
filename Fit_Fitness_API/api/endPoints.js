@@ -34,9 +34,9 @@ async function getEndPoint(text, res) {
 }
 
 async function register(text, req, res) {
-	const hashPassword = await helper.hashPassword(req);
-	req.body.password = hashPassword;
 	try {
+		const hashPassword = await helper.hashPassword(req);
+		req.body.password = hashPassword;
 		await db.addData(text, req.body);
 		res.status(201).send(req.body);
 	} catch {
@@ -47,9 +47,9 @@ async function register(text, req, res) {
 async function login(text, req, res) {
 	const { password, username } = req.body;
 	const user = await db.find(text, username);
-	console.log("user", username, text, user);
 	try {
 		if (user && bcrypt.compareSync(password, user.password)) {
+			console.log(`password: ${password} = ${user.password}`);
 			const title = text === "clients" ? "client" : "instructor";
 			const token = helper.generateToken(user, title);
 

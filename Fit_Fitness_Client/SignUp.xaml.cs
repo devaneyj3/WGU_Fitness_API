@@ -65,21 +65,27 @@ public partial class SignUp : ContentPage
 
         var apiUrl = $"{Client.clientURL}/register";
 
-        var client = new { name, email, phone, username, password };
-
-        var response = DatabaseServices.PostData<object, Client>(apiUrl, client).Data;
-
-        if (response != null)
+        try
         {
-            // Process the API response
 
-            await DisplayAlert("Successfull", "User created", "OK");
-            await Navigation.PopAsync();
+            var client = new { name, email, phone, username, password };
 
+            var response = DatabaseServices.PostData<object, Client>(apiUrl, client).Data;
+
+            if (response != null)
+            {
+                // Process the API response
+
+                await DisplayAlert("Successfull", "User created", "OK");
+                await Navigation.PopAsync();
+
+            }
         }
-        else
+        catch (Exception err)
         {
-            await DisplayAlert("Error", "There was an error creating user", "OK");
+            Console.WriteLine(err.ToString());
+            await DisplayAlert("Error", "You need to fill out all the fields", "Ok");
         }
+
     }
 }

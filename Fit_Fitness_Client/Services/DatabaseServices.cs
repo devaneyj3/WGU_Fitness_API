@@ -1,4 +1,6 @@
-﻿using RestSharp;
+﻿
+using RestSharp;
+using Microsoft.Maui.Controls;
 
 namespace Fit_Fitness_Client.Services
 {
@@ -15,17 +17,19 @@ namespace Fit_Fitness_Client.Services
             var request = new RestRequest(apiUrl, Method.Post).AddJsonBody(obj);
 
             var response = _restClient.Execute<TResponse>(request);
+            Console.WriteLine(response.ToString());
             if (response.IsSuccessful)
             {
                 return response;
             }
             else
-            {
-                // Handle error response
-                throw new Exception($"API request failed with status code: {response.StatusCode}");
-            }
-        }
+            {// Handle error response
 
+                // Return a default or empty response to avoid crashing the app
+                return default;
+            }
+
+        }
         //get 'all'
         public static RestResponse<List<TResponse>> GetData<TRequest, TResponse>(string apiUrl)
         where TRequest : class
@@ -40,8 +44,6 @@ namespace Fit_Fitness_Client.Services
             }
             else
             {
-                // Handle error response
-                Console.WriteLine($"API request failed with status code: {response.StatusCode}");
                 return default;
             }
 
@@ -59,8 +61,6 @@ namespace Fit_Fitness_Client.Services
             }
             else
             {
-                // Handle error response
-                Console.WriteLine($"API request failed with status code: {response.StatusCode}");
                 return default;
             }
 
@@ -78,8 +78,6 @@ namespace Fit_Fitness_Client.Services
             }
             else
             {
-                // Handle error response
-                Console.WriteLine($"API request failed with status code: {response.StatusCode}");
                 return default;
             }
 
@@ -98,8 +96,6 @@ namespace Fit_Fitness_Client.Services
             }
             else
             {
-                // Handle error response
-                Console.WriteLine($"API request failed with status code: {response.StatusCode}");
                 return default;
             }
 
@@ -117,8 +113,6 @@ namespace Fit_Fitness_Client.Services
             }
             else
             {
-                // Handle error response
-                Console.WriteLine($"API request failed with status code: {response.StatusCode}");
                 return default;
             }
 

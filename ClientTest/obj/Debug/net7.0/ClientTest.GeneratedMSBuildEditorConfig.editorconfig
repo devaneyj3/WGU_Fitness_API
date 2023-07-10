@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ClientTest
-build_property.ProjectDir = /Users/jordandevaney/Desktop/d424-software-engineering-capstone/ClientTest/
+build_property.ProjectDir = /Users/jordandevaney/Desktop/d424-software-engineering-capstone-working_branch/ClientTest/

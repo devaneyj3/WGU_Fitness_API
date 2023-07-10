@@ -57,6 +57,7 @@ partial class ClassDetail : ContentPage
 
         if (response == true)
         {
+            try {
             //add client to class
             var addClassApiUrl = $"{Client.clientURL}/{Client.SignedInClientId}/fitness_classes/{selectedId}";
             var isAdded = DatabaseServices.AddClassToClient<object, FitnessClass>(addClassApiUrl).Data;
@@ -77,8 +78,8 @@ partial class ClassDetail : ContentPage
 
 
             }
-            else
-            {
+         
+            }catch (Exception) {
                 await DisplayAlert("Error", "There was an error reserving fitness classes", "OK");
             }
         }
@@ -90,6 +91,7 @@ partial class ClassDetail : ContentPage
 
         if (response == true)
         {
+            try {
             //delete client from class
             var deleteClassFromClientApiUrl = $"{Client.clientURL}/{Client.SignedInClientId}/fitness_classes/{selectedId}/remove";
             var deletedClass = DatabaseServices.DeleteData<object, FitnessClass>(deleteClassFromClientApiUrl).Data;
@@ -110,8 +112,8 @@ partial class ClassDetail : ContentPage
 
 
             }
-            else
-            {
+            
+            } catch  (Exception){
                 await DisplayAlert("Error", "There was an error withdrawing fitness classes", "OK");
             }
         }

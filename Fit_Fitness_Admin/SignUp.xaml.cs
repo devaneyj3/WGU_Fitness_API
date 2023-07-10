@@ -67,6 +67,7 @@ public partial class SignUp : ContentPage
 
         var instructor = new { name, email, phone, username, password };
 
+        try {
         var response = apiService.PostData<object, Instructor>(apiUrl, instructor).Data;
 
         if (response != null)
@@ -77,9 +78,9 @@ public partial class SignUp : ContentPage
             await Navigation.PopAsync();
 
         }
-        else
-        {
-            await DisplayAlert("Error", "There was an error creating user", "OK");
+   
+        } catch(Exception) {
         }
+            await DisplayAlert("Error", "You need to fill in all the fields", "OK");
     }
 }

@@ -16,9 +16,9 @@ public partial class Signin: ContentPage
    async void SignIn_Clicked(object sender, EventArgs e)
     {
         var apiUrl = $"{Client.clientURL}/login";
+            var obj = new { username = username.Text, password = password.Text };
         try
         {
-            var obj = new { username = username.Text, password = password.Text };
 
 
             var client = DatabaseServices.PostData<object, Client>(apiUrl, obj).Data;
@@ -33,16 +33,10 @@ public partial class Signin: ContentPage
                 Preferences.Set("UserLoggedIn", true);
                 App.GoToMainPage();
             }
-            else
-            {
-                await DisplayAlert("Error", "Invalid Credentials", "OK");
-            }
-
-
         }
-        catch (Exception err)
+        catch (Exception)
         {
-            Console.WriteLine(err.ToString());
+            await DisplayAlert("Error", "User could not be found", "Ok");
 
         }
     }

@@ -24,8 +24,4 @@ app.get("/", function (req, res) {
 	res.status(200).send("app is up");
 });
 
-const port = process.env.PORT || 3000; // Use the PORT environment variable if available, otherwise use port 3000
-
-app.listen(port, () => {
-	console.log(`Server listening on port ${port}`);
-});
+module.exports = app;
