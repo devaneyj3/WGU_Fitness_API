@@ -35,10 +35,10 @@ public partial class Signin: ContentPage
                 await DisplayAlert("Client Error", client.ToString(), "OK");
             }
         }
-        catch (Exception err)
+        catch (Exception)
         {
 
-            await DisplayAlert("Catching Error", err.ToString(), "Ok");
+            await DisplayAlert("Error", "Invalid Credentials", "Ok");
 
         }
     }

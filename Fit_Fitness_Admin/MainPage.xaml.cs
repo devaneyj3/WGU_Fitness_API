@@ -35,12 +35,17 @@ public partial class MainPage : ContentPage
                 Preferences.Set("UserLoggedIn", true);
                 await Navigation.PushAsync(new DashboardPage());
             }
+            else
+            {
+                await DisplayAlert("Error", "Invalid Credentials", "OK");
+            }
 
 
         }
-        catch (Exception)
+        catch (Exception err)
         {
-            await DisplayAlert("Error", " User not found", "OK");
+            Console.WriteLine(err.ToString());
+
         }
     }
     void Username_Completed(object sender, EventArgs e)

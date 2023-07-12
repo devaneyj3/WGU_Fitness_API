@@ -24,11 +24,11 @@ public partial class DashboardPage : ContentPage
         if (Preferences.ContainsKey("SignedInInstructorName"))
         {
             string name = Preferences.Get("SignedInInstructorName", string.Empty);
-            string id = Preferences.Get("SignedInInstructorId", string.Empty);
+            int id = Preferences.Get("SignedInInstructorId", 0);
             string email = Preferences.Get("SignedInInstructorEmail", string.Empty);
             string phone = Preferences.Get("SignedInInstructorPhone", string.Empty);
 
-            Instructor.SignedInInstructorId = int.Parse(id);
+            Instructor.SignedInInstructorId = id;
             Instructor.SignedInInstructorName = name;
             Instructor.SignedInInstructorEmail = email;
             Instructor.SignedInInstructorPhone = phone;

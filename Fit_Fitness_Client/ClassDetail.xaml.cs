@@ -1,7 +1,6 @@
 ﻿
 using Fit_Fitness_Client.Models;
 using Fit_Fitness_Client.Services;
-using Npgsql;
 
 namespace Fit_Fitness_Client;
 

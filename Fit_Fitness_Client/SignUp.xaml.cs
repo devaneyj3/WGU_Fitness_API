@@ -83,7 +83,6 @@ public partial class SignUp : ContentPage
         }
         catch (Exception err)
         {
-            Console.WriteLine(err.ToString());
             await DisplayAlert("Error", "You need to fill out all the fields", "Ok");
         }
 
