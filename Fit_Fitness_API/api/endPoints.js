@@ -36,6 +36,9 @@ async function getEndPoint(text, res) {
 async function register(text, req, res) {
 	try {
 		const hashPassword = await helper.hashPassword(req);
+		console.log(
+			`Hashing password to register for, ${req.body} to ${hashPassword}`
+		);
 		req.body.password = hashPassword;
 		await db.addData(text, req.body);
 		res.status(201).send(req.body);
@@ -49,9 +52,10 @@ async function login(text, req, res) {
 	const user = await db.find(text, username);
 	try {
 		if (user && bcrypt.compareSync(password, user.password)) {
-			console.log(`password: ${password} = ${user.password}`);
-			const title = text === "clients" ? "client" : "instructor";
-			const token = helper.generateToken(user, title);
+			console.log(
+				`login password is ${password} and found user password is ${user.password} line 53`
+			);
+			console.log(`entered in password equals found password`);
 
 			res.status(200).json({
 				name: user.username,
@@ -60,7 +64,6 @@ async function login(text, req, res) {
 				email: user.email,
 				phone: user.phone,
 				id: user.id,
-				token,
 			});
 		} else {
 			res.status(404).json({ message: `${username}, could not be found` });

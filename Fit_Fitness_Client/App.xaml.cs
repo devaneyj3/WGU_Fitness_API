@@ -1,4 +1,5 @@
 ﻿using Fit_Fitness_Client.Models;
+using Microsoft.Maui.Controls;
 
 
 namespace Fit_Fitness_Client;
@@ -10,7 +11,6 @@ public partial class App : Application
         InitializeComponent();
 
 
-        Application.Current.MainPage = new AppShell();
         if (Preferences.ContainsKey("UserLoggedIn"))
         {
             GoToMainPage();
@@ -23,9 +23,20 @@ public partial class App : Application
 
 
     }
-     public static void GoToMainPage()
+    public static void GoToMainPage()
     {
-        Application.Current.MainPage =  new AppShell();
+
+        //for some reason i get a crash when using app shell
+        try
+        {
+            Application.Current.MainPage = new NavigationPage(new DashboardPage());
+        }
+        catch (Exception ex)
+        {
+            // Log or display the exception details
+            System.Diagnostics.Debug.WriteLine($"Exception in GoToMainPage: {ex}");
+        }
     }
+
 }
 

@@ -12,19 +12,18 @@ public partial class Signin: ContentPage
         Preferences.Clear();
     }
 
-
-   async void SignIn_Clicked(object sender, EventArgs e)
+    async void SignIn_Clicked(object sender, EventArgs e)
     {
         var apiUrl = $"{Client.clientURL}/login";
-            var obj = new { username = username.Text, password = password.Text };
+        var obj = new { username = username.Text, password = password.Text };
         try
         {
 
 
             var client = DatabaseServices.PostData<object, Client>(apiUrl, obj).Data;
+           
             if (client != null)
             {
-
                 Preferences.Set("SignedInClientId", client.id);
                 Preferences.Set("SignedInClientName", client.name);
                 Preferences.Set("SignedInClientEmail", client.email);
@@ -32,11 +31,14 @@ public partial class Signin: ContentPage
 
                 Preferences.Set("UserLoggedIn", true);
                 App.GoToMainPage();
+            } else {
+                await DisplayAlert("Client Error", client.ToString(), "OK");
             }
         }
-        catch (Exception)
+        catch (Exception err)
         {
-            await DisplayAlert("Error", "User could not be found", "Ok");
+
+            await DisplayAlert("Catching Error", err.ToString(), "Ok");
 
         }
     }

@@ -24,4 +24,27 @@ app.get("/", function (req, res) {
 	res.status(200).send("app is up");
 });
 
+var port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
+
+app.listen(port, () => {
+	console.log(`Server is running on port ${port}`);
+});
+
+function normalizePort(val) {
+	var port = parseInt(val, 10);
+
+	if (isNaN(port)) {
+		// named pipe
+		return val;
+	}
+
+	if (port >= 0) {
+		// port number
+		return port;
+	}
+
+	return false;
+}
+
 module.exports = app;

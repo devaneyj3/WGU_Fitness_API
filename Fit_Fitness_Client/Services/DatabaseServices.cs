@@ -17,9 +17,9 @@ namespace Fit_Fitness_Client.Services
             var request = new RestRequest(apiUrl, Method.Post).AddJsonBody(obj);
 
             var response = _restClient.Execute<TResponse>(request);
-            Console.WriteLine(response.ToString());
             if (response.IsSuccessful)
             {
+
                 return response;
             }
             else

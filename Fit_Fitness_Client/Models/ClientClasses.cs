@@ -14,20 +14,20 @@ namespace Fit_Fitness_Client.Models
         {
             var apiUrl = $"{Client.clientURL}/{Client.SignedInClientId}/fitness_classes";
             Console.WriteLine($"Client URL is {apiUrl}");
-            try
-            {
-                var fitnessClassListResponse = DatabaseServices.GetData<object, FitnessClass>(apiUrl);
+        //   try
+        //    {
+        //        var fitnessClassListResponse = DatabaseServices.GetData<object, FitnessClass>(apiUrl);
 
-                // change label text based on class list count
-                if (fitnessClassListResponse != null)
-                {
-                    Client.clientFitnessClassesList = fitnessClassListResponse.Data;
-                }
-            }
-            catch (Exception err)
-            {
-                Console.WriteLine(err.ToString());
-            }
+        //        // change label text based on class list count
+        //        if (fitnessClassListResponse != null)
+        //        {
+        //            Client.clientFitnessClassesList = fitnessClassListResponse.Data;
+        //        }
+        //    }
+        //    catch (Exception err)
+        //    {
+        //        Console.WriteLine(err.ToString());
+        //    }
         }
     }
 }

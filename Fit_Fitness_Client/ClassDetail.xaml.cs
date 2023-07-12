@@ -74,7 +74,7 @@ partial class ClassDetail : ContentPage
                 await DisplayAlert("Successfull", "Fitness class reserved", "OK");
 
 
-                await Shell.Current.Navigation.PopToRootAsync();
+                await Navigation.PopToRootAsync();
 
 
             }
@@ -108,7 +108,7 @@ partial class ClassDetail : ContentPage
                 await DisplayAlert("Successfull", "You withdrew from class", "OK");
 
 
-                await Shell.Current.Navigation.PopToRootAsync();
+                await Navigation.PopToRootAsync();
 
 
             }

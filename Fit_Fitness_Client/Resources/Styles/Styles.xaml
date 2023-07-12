@@ -8,8 +8,9 @@
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>
      <Style x:Key="BaseStyle" TargetType="Element">
-            <Setter Property="Shell.TabBarBackgroundColor" Value="Orange" />
-            <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource White}" />
+            <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}"/>
+            <Setter Property="Shell.TabBarTitleColor" Value="Orange" />
+ 
         </Style>
 
     <Style TargetType="IndicatorView">

@@ -5,7 +5,6 @@ const bcrypt = require("bcryptjs");
 module.exports = {
 	dbError,
 	notFound,
-	generateToken,
 	hashPassword,
 };
 
@@ -18,20 +17,8 @@ function notFound(text, res) {
 }
 
 async function hashPassword(req) {
-	console.log("In helper, ", req.body.password);
+	console.log("In helper.js hashing password, ", req.body.password);
 	const hashedPassword = await bcrypt.hashSync(req.body.password, 10);
 	req.body.password = hashedPassword;
 	return req.body.password;
-}
-
-function generateToken(user, title) {
-	const payload = {
-		subject: user.id,
-		username: user.username,
-		role: title,
-	};
-	const config = {
-		expiresIn: "1hr",
-	};
-	return jwt.sign(payload, secrets.jwtSecret, config);
 }

@@ -5,6 +5,7 @@
              Title="My Classes">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Sign Out" Clicked="OnSignOutClicked"/>
+        <ToolbarItem Text="Search Classes" Clicked="SearchClassesClicked"/>
     </ContentPage.ToolbarItems>
     <VerticalStackLayout Margin="20">
         <VerticalStackLayout>
@@ -22,7 +23,7 @@
             VerticalOptions="Center"
             HorizontalOptions="Center"/>
 
-        <!-- CollectionView -->
+
         <CollectionView x:Name="cCollectionView" ItemsLayout="VerticalList" SelectionMode="Single" SelectionChanged="cCollectionView_SelectionChanged">
 
             <CollectionView.ItemTemplate>

@@ -5,18 +5,21 @@ namespace Fit_Fitness_Client;
 
 public partial class DashboardPage : ContentPage
 {
-   
+
     public DashboardPage()
     {
         InitializeComponent();
+
     }
     protected override void OnAppearing()
     {
         base.OnAppearing();
+
         if (Preferences.ContainsKey("SignedInClientName"))
         {
             string name = Preferences.Get("SignedInClientName", string.Empty);
-            string id = Preferences.Get("SignedInClientId", string.Empty);
+            int clientID = Preferences.Get("SignedInClientId", 0);
+            string id = clientID.ToString();
             string email = Preferences.Get("SignedInClientEmail", string.Empty);
             string phone = Preferences.Get("SignedInClientPhone", string.Empty);
 
@@ -38,7 +41,7 @@ public partial class DashboardPage : ContentPage
         try
         {
             var fitnessClassListResponse = DatabaseServices.GetData<object, FitnessClass>(apiUrl);
-            
+
             // change label text based on class list count
             if (fitnessClassListResponse != null)
             {
@@ -62,18 +65,18 @@ public partial class DashboardPage : ContentPage
 
     }
 
-    void cCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
 
-    {
-        if (e.CurrentSelection.FirstOrDefault() is FitnessClass fitnessClass)
+        void cCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (e.CurrentSelection.FirstOrDefault() is FitnessClass fitnessClass)
+            {
 
-            Navigation.PushAsync(new ClassDetail(fitnessClass));
+                Navigation.PushAsync(new ClassDetail(fitnessClass));
 
+            }
+            cCollectionView.SelectedItem = null;
         }
-        cCollectionView.SelectedItem = null;
-    }
-    async void OnSignOutClicked(object sender, EventArgs e)
+        async void OnSignOutClicked(object sender, EventArgs e)
     {
         {
             bool response = await DisplayAlert("Sign Out", $"Are you sure you want to sign out?", "Yes", "No");
@@ -93,4 +96,10 @@ public partial class DashboardPage : ContentPage
 
         cCollectionView.ItemsSource = Client.clientFitnessClassesList.FindAll((fc => fc.name.ToUpper().Contains(searchTerm)));
     }
+
+    void SearchClassesClicked(System.Object sender, System.EventArgs e)
+    {
+        Navigation.PushAsync(new SearchPage());
+    }
+    
 }

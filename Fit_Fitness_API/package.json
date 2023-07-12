@@ -8,9 +8,11 @@
 		"debug": "nodemon --inspect-brk=9229 app.js",
 		"build": "docker build -t api . && docker run -p 3000:3000 api",
 		"containers": "docker ps -a",
-		"stop": "docker stop api_container",
 		"rm_containers": "docker stop $(docker ps -aq) && docker rm $(docker ps -aq)",
-		"stop_running": "docker stop $(docker ps -aq)"
+		"stop_running": "docker stop $(docker ps -aq)",
+		"push": "heroku container:push web -a evening-fjord-36308 && heroku container:release web -a evening-fjord-36308",
+		"logs": "heroku logs --tail -a evening-fjord-36308",
+		"redeploy": "docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker build -t api . && heroku container:push web -a evening-fjord-36308 && heroku container:release web -a evening-fjord-36308 "
 	},
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
